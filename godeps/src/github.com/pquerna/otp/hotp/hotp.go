@@ -57,27 +57,33 @@ type ValidateOpts struct {
 	Algorithm otp.Algorithm
 }
 
-// ValidateCustom validates an HOTP with customizable options. Most users should
-// use Validate().
-func ValidateCustom(passcode string, counter uint64, secret string, opts ValidateOpts) (bool, error) {
-	passcode = strings.TrimSpace(passcode)
+// GenerateCode creates a HOTP passcode given a counter and secret.
+// This is a shortcut for GenerateCodeCustom, with parameters that
+// are compataible with Google-Authenticator.
+func GenerateCode(secret string, counter uint64) (string, error) {
+	return GenerateCodeCustom(secret, counter, ValidateOpts{
+		Digits:    otp.DigitsSix,
+		Algorithm: otp.AlgorithmSHA1,
+	})
+}
 
-	switch opts.Digits {
-	case otp.DigitsSix:
-		if len(passcode) != 6 {
-			return false, otp.ErrValidateInputInvalidLength6
-		}
-	case otp.DigitsEight:
-		if len(passcode) != 8 {
-			return false, otp.ErrValidateInputInvalidLength8
-		}
-	default:
-		panic("unsupported Digits value.")
+// GenerateCodeCustom uses a counter and secret value and options struct to
+// create a passcode.
+func GenerateCodeCustom(secret string, counter uint64, opts ValidateOpts) (passcode string, err error) {
+	// As noted in issue #10 and #17 this adds support for TOTP secrets that are
+	// missing their padding.
+	secret = strings.TrimSpace(secret)
+	if n := len(secret) % 8; n != 0 {
+		secret = secret + strings.Repeat("=", 8-n)
 	}
+
+	// As noted in issue #24 Google has started producing base32 in lower case,
+	// but the StdEncoding (and the RFC), expect a dictionary of only upper case letters.
+	secret = strings.ToUpper(secret)
 
 	secretBytes, err := base32.StdEncoding.DecodeString(secret)
 	if err != nil {
-		return false, otp.ErrValidateSecretInvalidBase32
+		return "", otp.ErrValidateSecretInvalidBase32
 	}
 
 	buf := make([]byte, 8)
@@ -108,7 +114,22 @@ func ValidateCustom(passcode string, counter uint64, secret string, opts Validat
 		fmt.Printf("mod'ed=%v\n", mod)
 	}
 
-	otpstr := opts.Digits.Format(mod)
+	return opts.Digits.Format(mod), nil
+}
+
+// ValidateCustom validates an HOTP with customizable options. Most users should
+// use Validate().
+func ValidateCustom(passcode string, counter uint64, secret string, opts ValidateOpts) (bool, error) {
+	passcode = strings.TrimSpace(passcode)
+
+	if len(passcode) != opts.Digits.Length() {
+		return false, otp.ErrValidateInputInvalidLength
+	}
+
+	otpstr, err := GenerateCodeCustom(secret, counter, opts)
+	if err != nil {
+		return false, err
+	}
 
 	if subtle.ConstantTimeCompare([]byte(otpstr), []byte(passcode)) == 1 {
 		return true, nil
@@ -155,7 +176,7 @@ func Generate(opts GenerateOpts) (*otp.Key, error) {
 		return nil, err
 	}
 
-	v.Set("secret", base32.StdEncoding.EncodeToString(secret))
+	v.Set("secret", strings.TrimRight(base32.StdEncoding.EncodeToString(secret), "="))
 	v.Set("issuer", opts.Issuer)
 	v.Set("algorithm", opts.Algorithm.String())
 	v.Set("digits", opts.Digits.String())

@@ -4,18 +4,9 @@
 package gotest
 
 import (
-	"fmt"
 	"runtime"
 	"strings"
 )
-
-func FormatExternalFileAndLine() string {
-	file, line, _ := ResolveExternalCaller()
-	if line == -1 {
-		return "<unknown caller!>" // panic?
-	}
-	return fmt.Sprintf("%s:%d", file, line)
-}
 
 func ResolveExternalCaller() (file string, line int, name string) {
 	var caller_id uintptr
@@ -28,7 +19,7 @@ func ResolveExternalCaller() (file string, line int, name string) {
 			return
 		}
 	}
-	file, line, name = "<unkown file>", -1, "<unknown name>"
+	file, line, name = "<unknown file>", -1, "<unknown name>"
 	return // panic?
 }
 

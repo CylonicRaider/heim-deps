@@ -1,4 +1,4 @@
-// Copyright 2015 CoreOS, Inc.
+// Copyright 2015 The etcd Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,10 +20,13 @@ import (
 	"testing"
 	"time"
 
+	"github.com/coreos/etcd/etcdserver/membership"
+	"github.com/coreos/etcd/pkg/mock/mockstorage"
 	"github.com/coreos/etcd/pkg/pbutil"
 	"github.com/coreos/etcd/pkg/types"
 	"github.com/coreos/etcd/raft"
 	"github.com/coreos/etcd/raft/raftpb"
+	"github.com/coreos/etcd/rafthttp"
 )
 
 func TestGetIDs(t *testing.T) {
@@ -69,9 +72,9 @@ func TestGetIDs(t *testing.T) {
 }
 
 func TestCreateConfigChangeEnts(t *testing.T) {
-	m := Member{
+	m := membership.Member{
 		ID:             types.ID(1),
-		RaftAttributes: RaftAttributes{PeerURLs: []string{"http://localhost:7001", "http://localhost:2380"}},
+		RaftAttributes: membership.RaftAttributes{PeerURLs: []string{"http://localhost:2380"}},
 	}
 	ctx, err := json.Marshal(m)
 	if err != nil {
@@ -149,25 +152,74 @@ func TestCreateConfigChangeEnts(t *testing.T) {
 }
 
 func TestStopRaftWhenWaitingForApplyDone(t *testing.T) {
-	n := newReadyNode()
-	r := raftNode{
+	n := newNopReadyNode()
+	r := newRaftNode(raftNodeConfig{
 		Node:        n,
-		storage:     &storageRecorder{},
-		raftStorage: newRaftStorage(),
-		transport:   &nopTransporter{},
-	}
-	r.start(&EtcdServer{r: r})
+		storage:     mockstorage.NewStorageRecorder(""),
+		raftStorage: raft.NewMemoryStorage(),
+		transport:   rafthttp.NewNopTransporter(),
+	})
+	srv := &EtcdServer{r: *r}
+	srv.r.start(nil)
 	n.readyc <- raft.Ready{}
 	select {
-	case <-r.applyc:
+	case <-srv.r.applyc:
 	case <-time.After(time.Second):
 		t.Fatalf("failed to receive apply struct")
 	}
 
-	r.stopped <- struct{}{}
+	srv.r.stopped <- struct{}{}
 	select {
-	case <-r.done:
+	case <-srv.r.done:
 	case <-time.After(time.Second):
 		t.Fatalf("failed to stop raft loop")
+	}
+}
+
+// TestConfgChangeBlocksApply ensures apply blocks if committed entries contain config-change.
+func TestConfgChangeBlocksApply(t *testing.T) {
+	n := newNopReadyNode()
+
+	r := newRaftNode(raftNodeConfig{
+		Node:        n,
+		storage:     mockstorage.NewStorageRecorder(""),
+		raftStorage: raft.NewMemoryStorage(),
+		transport:   rafthttp.NewNopTransporter(),
+	})
+	srv := &EtcdServer{r: *r}
+
+	srv.r.start(&raftReadyHandler{
+		getLead:          func() uint64 { return 0 },
+		updateLead:       func(uint64) {},
+		updateLeadership: func(bool) {},
+	})
+	defer srv.r.Stop()
+
+	n.readyc <- raft.Ready{
+		SoftState:        &raft.SoftState{RaftState: raft.StateFollower},
+		CommittedEntries: []raftpb.Entry{{Type: raftpb.EntryConfChange}},
+	}
+	ap := <-srv.r.applyc
+
+	continueC := make(chan struct{})
+	go func() {
+		n.readyc <- raft.Ready{}
+		<-srv.r.applyc
+		close(continueC)
+	}()
+
+	select {
+	case <-continueC:
+		t.Fatalf("unexpected execution: raft routine should block waiting for apply")
+	case <-time.After(time.Second):
+	}
+
+	// finish apply, unblock raft routine
+	<-ap.notifyc
+
+	select {
+	case <-continueC:
+	case <-time.After(time.Second):
+		t.Fatalf("unexpected blocking on execution")
 	}
 }

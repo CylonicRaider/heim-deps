@@ -31,3 +31,39 @@ func TestSubprotocols(t *testing.T) {
 		}
 	}
 }
+
+var isWebSocketUpgradeTests = []struct {
+	ok bool
+	h  http.Header
+}{
+	{false, http.Header{"Upgrade": {"websocket"}}},
+	{false, http.Header{"Connection": {"upgrade"}}},
+	{true, http.Header{"Connection": {"upgRade"}, "Upgrade": {"WebSocket"}}},
+}
+
+func TestIsWebSocketUpgrade(t *testing.T) {
+	for _, tt := range isWebSocketUpgradeTests {
+		ok := IsWebSocketUpgrade(&http.Request{Header: tt.h})
+		if tt.ok != ok {
+			t.Errorf("IsWebSocketUpgrade(%v) returned %v, want %v", tt.h, ok, tt.ok)
+		}
+	}
+}
+
+var checkSameOriginTests = []struct {
+	ok bool
+	r  *http.Request
+}{
+	{false, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": []string{"https://other.org"}}}},
+	{true, &http.Request{Host: "example.org", Header: map[string][]string{"Origin": []string{"https://example.org"}}}},
+	{true, &http.Request{Host: "Example.org", Header: map[string][]string{"Origin": []string{"https://example.org"}}}},
+}
+
+func TestCheckSameOrigin(t *testing.T) {
+	for _, tt := range checkSameOriginTests {
+		ok := checkSameOrigin(tt.r)
+		if tt.ok != ok {
+			t.Errorf("checkSameOrigin(%+v) returned %v, want %v", tt.r, ok, tt.ok)
+		}
+	}
+}

@@ -15,6 +15,7 @@ import (
 	"bytes"
 	"fmt"
 	"reflect"
+	"sync"
 )
 
 // CustomScanner binds a database column value to a Go type
@@ -32,6 +33,13 @@ type CustomScanner struct {
 	Binder func(holder interface{}, target interface{}) error
 }
 
+// Used to filter columns when selectively updating
+type ColumnFilter func(*ColumnMap) bool
+
+func acceptAllFilter(col *ColumnMap) bool {
+	return true
+}
+
 // Bind is called automatically by gorp after Scan()
 func (me CustomScanner) Bind() error {
 	return me.Binder(me.Holder, me.Target)
@@ -44,9 +52,10 @@ type bindPlan struct {
 	versField         string
 	autoIncrIdx       int
 	autoIncrFieldName string
+	once              sync.Once
 }
 
-func (plan bindPlan) createBindInstance(elem reflect.Value, conv TypeConverter) (bindInstance, error) {
+func (plan *bindPlan) createBindInstance(elem reflect.Value, conv TypeConverter) (bindInstance, error) {
 	bi := bindInstance{query: plan.query, autoIncrIdx: plan.autoIncrIdx, autoIncrFieldName: plan.autoIncrFieldName, versField: plan.versField}
 	if plan.versField != "" {
 		bi.existingVersion = elem.FieldByName(plan.versField).Int()
@@ -100,8 +109,8 @@ type bindInstance struct {
 }
 
 func (t *TableMap) bindInsert(elem reflect.Value) (bindInstance, error) {
-	plan := t.insertPlan
-	if plan.query == "" {
+	plan := &t.insertPlan
+	plan.once.Do(func() {
 		plan.autoIncrIdx = -1
 
 		s := bytes.Buffer{}
@@ -154,23 +163,25 @@ func (t *TableMap) bindInsert(elem reflect.Value) (bindInstance, error) {
 		s.WriteString(t.dbmap.Dialect.QuerySuffix())
 
 		plan.query = s.String()
-		t.insertPlan = plan
-	}
+	})
 
 	return plan.createBindInstance(elem, t.dbmap.TypeConverter)
 }
 
-func (t *TableMap) bindUpdate(elem reflect.Value) (bindInstance, error) {
-	plan := t.updatePlan
-	if plan.query == "" {
+func (t *TableMap) bindUpdate(elem reflect.Value, colFilter ColumnFilter) (bindInstance, error) {
+	if colFilter == nil {
+		colFilter = acceptAllFilter
+	}
 
+	plan := &t.updatePlan
+	plan.once.Do(func() {
 		s := bytes.Buffer{}
 		s.WriteString(fmt.Sprintf("update %s set ", t.dbmap.Dialect.QuotedTableForQuery(t.SchemaName, t.TableName)))
 		x := 0
 
 		for y := range t.Columns {
 			col := t.Columns[y]
-			if !col.isAutoIncr && !col.Transient {
+			if !col.isAutoIncr && !col.Transient && colFilter(col) {
 				if x > 0 {
 					s.WriteString(", ")
 				}
@@ -212,16 +223,14 @@ func (t *TableMap) bindUpdate(elem reflect.Value) (bindInstance, error) {
 		s.WriteString(t.dbmap.Dialect.QuerySuffix())
 
 		plan.query = s.String()
-		t.updatePlan = plan
-	}
+	})
 
 	return plan.createBindInstance(elem, t.dbmap.TypeConverter)
 }
 
 func (t *TableMap) bindDelete(elem reflect.Value) (bindInstance, error) {
-	plan := t.deletePlan
-	if plan.query == "" {
-
+	plan := &t.deletePlan
+	plan.once.Do(func() {
 		s := bytes.Buffer{}
 		s.WriteString(fmt.Sprintf("delete from %s", t.dbmap.Dialect.QuotedTableForQuery(t.SchemaName, t.TableName)))
 
@@ -258,16 +267,14 @@ func (t *TableMap) bindDelete(elem reflect.Value) (bindInstance, error) {
 		s.WriteString(t.dbmap.Dialect.QuerySuffix())
 
 		plan.query = s.String()
-		t.deletePlan = plan
-	}
+	})
 
 	return plan.createBindInstance(elem, t.dbmap.TypeConverter)
 }
 
-func (t *TableMap) bindGet() bindPlan {
-	plan := t.getPlan
-	if plan.query == "" {
-
+func (t *TableMap) bindGet() *bindPlan {
+	plan := &t.getPlan
+	plan.once.Do(func() {
 		s := bytes.Buffer{}
 		s.WriteString("select ")
 
@@ -299,8 +306,7 @@ func (t *TableMap) bindGet() bindPlan {
 		s.WriteString(t.dbmap.Dialect.QuerySuffix())
 
 		plan.query = s.String()
-		t.getPlan = plan
-	}
+	})
 
 	return plan
 }

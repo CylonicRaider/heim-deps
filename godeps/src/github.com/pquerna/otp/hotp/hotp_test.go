@@ -19,6 +19,7 @@ package hotp
 
 import (
 	"github.com/pquerna/otp"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
 	"encoding/base32"
@@ -32,24 +33,27 @@ type tc struct {
 	Secret  string
 }
 
+var (
+	secSha1 = base32.StdEncoding.EncodeToString([]byte("12345678901234567890"))
+
+	rfcMatrixTCs = []tc{
+		{0, "755224", otp.AlgorithmSHA1, secSha1},
+		{1, "287082", otp.AlgorithmSHA1, secSha1},
+		{2, "359152", otp.AlgorithmSHA1, secSha1},
+		{3, "969429", otp.AlgorithmSHA1, secSha1},
+		{4, "338314", otp.AlgorithmSHA1, secSha1},
+		{5, "254676", otp.AlgorithmSHA1, secSha1},
+		{6, "287922", otp.AlgorithmSHA1, secSha1},
+		{7, "162583", otp.AlgorithmSHA1, secSha1},
+		{8, "399871", otp.AlgorithmSHA1, secSha1},
+		{9, "520489", otp.AlgorithmSHA1, secSha1},
+	}
+)
+
 // Test values from http://tools.ietf.org/html/rfc4226#appendix-D
 func TestValidateRFCMatrix(t *testing.T) {
-	secSha1 := base32.StdEncoding.EncodeToString([]byte("12345678901234567890"))
 
-	tests := []tc{
-		tc{0, "755224", otp.AlgorithmSHA1, secSha1},
-		tc{1, "287082", otp.AlgorithmSHA1, secSha1},
-		tc{2, "359152", otp.AlgorithmSHA1, secSha1},
-		tc{3, "969429", otp.AlgorithmSHA1, secSha1},
-		tc{4, "338314", otp.AlgorithmSHA1, secSha1},
-		tc{5, "254676", otp.AlgorithmSHA1, secSha1},
-		tc{6, "287922", otp.AlgorithmSHA1, secSha1},
-		tc{7, "162583", otp.AlgorithmSHA1, secSha1},
-		tc{8, "399871", otp.AlgorithmSHA1, secSha1},
-		tc{9, "520489", otp.AlgorithmSHA1, secSha1},
-	}
-
-	for _, tx := range tests {
+	for _, tx := range rfcMatrixTCs {
 		valid, err := ValidateCustom(tx.TOTP, tx.Counter, tx.Secret,
 			ValidateOpts{
 				Digits:    otp.DigitsSix,
@@ -62,6 +66,18 @@ func TestValidateRFCMatrix(t *testing.T) {
 	}
 }
 
+func TestGenerateRFCMatrix(t *testing.T) {
+	for _, tx := range rfcMatrixTCs {
+		passcode, err := GenerateCodeCustom(tx.Secret, tx.Counter,
+			ValidateOpts{
+				Digits:    otp.DigitsSix,
+				Algorithm: tx.Mode,
+			})
+		assert.Nil(t, err)
+		assert.Equal(t, tx.TOTP, passcode)
+	}
+}
+
 func TestValidateInvalid(t *testing.T) {
 	secSha1 := base32.StdEncoding.EncodeToString([]byte("12345678901234567890"))
 
@@ -70,7 +86,7 @@ func TestValidateInvalid(t *testing.T) {
 			Digits:    otp.DigitsSix,
 			Algorithm: otp.AlgorithmSHA1,
 		})
-	require.Equal(t, otp.ErrValidateInputInvalidLength6, err, "Expected Invalid length error.")
+	require.Equal(t, otp.ErrValidateInputInvalidLength, err, "Expected Invalid length error.")
 	require.Equal(t, false, valid, "Valid should be false when we have an error.")
 
 	valid, err = ValidateCustom("foo", 11, secSha1,
@@ -78,7 +94,7 @@ func TestValidateInvalid(t *testing.T) {
 			Digits:    otp.DigitsEight,
 			Algorithm: otp.AlgorithmSHA1,
 		})
-	require.Equal(t, otp.ErrValidateInputInvalidLength8, err, "Expected Invalid length error.")
+	require.Equal(t, otp.ErrValidateInputInvalidLength, err, "Expected Invalid length error.")
 	require.Equal(t, false, valid, "Valid should be false when we have an error.")
 
 	valid, err = ValidateCustom("000000", 11, secSha1,
@@ -91,6 +107,27 @@ func TestValidateInvalid(t *testing.T) {
 
 	valid = Validate("000000", 11, secSha1)
 	require.Equal(t, false, valid, "Valid should be false.")
+}
+
+// This tests for issue #10 - secrets without padding
+func TestValidatePadding(t *testing.T) {
+	valid, err := ValidateCustom("831097", 0, "JBSWY3DPEHPK3PX",
+		ValidateOpts{
+			Digits:    otp.DigitsSix,
+			Algorithm: otp.AlgorithmSHA1,
+		})
+	require.NoError(t, err, "Expected no error.")
+	require.Equal(t, true, valid, "Valid should be true.")
+}
+
+func TestValidateLowerCaseSecret(t *testing.T) {
+	valid, err := ValidateCustom("831097", 0, "jbswy3dpehpk3px",
+		ValidateOpts{
+			Digits:    otp.DigitsSix,
+			Algorithm: otp.AlgorithmSHA1,
+		})
+	require.NoError(t, err, "Expected no error.")
+	require.Equal(t, true, valid, "Valid should be true.")
 }
 
 func TestGenerate(t *testing.T) {
@@ -124,4 +161,12 @@ func TestGenerate(t *testing.T) {
 	})
 	require.Equal(t, otp.ErrGenerateMissingAccountName, err, "generate missing account name.")
 	require.Nil(t, k, "key should be nil on error.")
+
+	k, err = Generate(GenerateOpts{
+		Issuer:      "SnakeOil",
+		AccountName: "alice@example.com",
+		SecretSize:  17, // anything that is not divisable by 5, really
+	})
+	require.NoError(t, err, "Secret size is valid when length not divisable by 5.")
+	require.NotContains(t, k.Secret(), "=", "Secret has no escaped characters.")
 }

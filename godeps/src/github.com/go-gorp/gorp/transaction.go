@@ -12,6 +12,7 @@
 package gorp
 
 import (
+	"context"
 	"database/sql"
 	"time"
 )
@@ -21,9 +22,17 @@ import (
 // of that transaction.  Transactions should be terminated with
 // a call to Commit() or Rollback()
 type Transaction struct {
+	ctx    context.Context
 	dbmap  *DbMap
 	tx     *sql.Tx
 	closed bool
+}
+
+func (t *Transaction) WithContext(ctx context.Context) SqlExecutor {
+	copy := &Transaction{}
+	*copy = *t
+	copy.ctx = ctx
+	return copy
 }
 
 // Insert has the same behavior as DbMap.Insert(), but runs in a transaction.
@@ -33,7 +42,12 @@ func (t *Transaction) Insert(list ...interface{}) error {
 
 // Update had the same behavior as DbMap.Update(), but runs in a transaction.
 func (t *Transaction) Update(list ...interface{}) (int64, error) {
-	return update(t.dbmap, t, list...)
+	return update(t.dbmap, t, nil, list...)
+}
+
+// UpdateColumns had the same behavior as DbMap.UpdateColumns(), but runs in a transaction.
+func (t *Transaction) UpdateColumns(filter ColumnFilter, list ...interface{}) (int64, error) {
+	return update(t.dbmap, t, filter, list...)
 }
 
 // Delete has the same behavior as DbMap.Delete(), but runs in a transaction.
@@ -132,7 +146,7 @@ func (t *Transaction) Savepoint(name string) error {
 		now := time.Now()
 		defer t.dbmap.trace(now, query, nil)
 	}
-	_, err := t.tx.Exec(query)
+	_, err := exec(t, query)
 	return err
 }
 
@@ -145,7 +159,7 @@ func (t *Transaction) RollbackToSavepoint(savepoint string) error {
 		now := time.Now()
 		defer t.dbmap.trace(now, query, nil)
 	}
-	_, err := t.tx.Exec(query)
+	_, err := exec(t, query)
 	return err
 }
 
@@ -158,7 +172,7 @@ func (t *Transaction) ReleaseSavepoint(savepoint string) error {
 		now := time.Now()
 		defer t.dbmap.trace(now, query, nil)
 	}
-	_, err := t.tx.Exec(query)
+	_, err := exec(t, query)
 	return err
 }
 
@@ -168,21 +182,21 @@ func (t *Transaction) Prepare(query string) (*sql.Stmt, error) {
 		now := time.Now()
 		defer t.dbmap.trace(now, query, nil)
 	}
-	return t.tx.Prepare(query)
+	return prepare(t, query)
 }
 
-func (t *Transaction) queryRow(query string, args ...interface{}) *sql.Row {
+func (t *Transaction) QueryRow(query string, args ...interface{}) *sql.Row {
 	if t.dbmap.logger != nil {
 		now := time.Now()
 		defer t.dbmap.trace(now, query, args...)
 	}
-	return t.tx.QueryRow(query, args...)
+	return queryRow(t, query, args...)
 }
 
-func (t *Transaction) query(query string, args ...interface{}) (*sql.Rows, error) {
+func (t *Transaction) Query(q string, args ...interface{}) (*sql.Rows, error) {
 	if t.dbmap.logger != nil {
 		now := time.Now()
-		defer t.dbmap.trace(now, query, args...)
+		defer t.dbmap.trace(now, q, args...)
 	}
-	return t.tx.Query(query, args...)
+	return query(t, q, args...)
 }

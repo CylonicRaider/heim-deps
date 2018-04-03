@@ -1,4 +1,4 @@
-// Copyright 2015 CoreOS, Inc.
+// Copyright 2015 The etcd Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -79,8 +79,9 @@ func testUpdateTermFromMessage(t *testing.T, state StateType) {
 // Reference: section 5.1
 func TestRejectStaleTermMessage(t *testing.T) {
 	called := false
-	fakeStep := func(r *raft, m pb.Message) {
+	fakeStep := func(r *raft, m pb.Message) error {
 		called = true
+		return nil
 	}
 	r := newTestRaft(1, []uint64{1, 2, 3}, 10, 1, NewMemoryStorage())
 	r.step = fakeStep
@@ -88,7 +89,7 @@ func TestRejectStaleTermMessage(t *testing.T) {
 
 	r.Step(pb.Message{Type: pb.MsgApp, Term: r.Term - 1})
 
-	if called == true {
+	if called {
 		t.Errorf("stepFunc called = %v, want %v", called, false)
 	}
 }
@@ -159,7 +160,7 @@ func testNonleaderStartElection(t *testing.T, state StateType) {
 		r.becomeCandidate()
 	}
 
-	for i := 0; i < 2*et; i++ {
+	for i := 1; i < 2*et; i++ {
 		r.tick()
 	}
 
@@ -169,7 +170,7 @@ func testNonleaderStartElection(t *testing.T, state StateType) {
 	if r.state != StateCandidate {
 		t.Errorf("state = %s, want %s", r.state, StateCandidate)
 	}
-	if r.votes[r.id] != true {
+	if !r.votes[r.id] {
 		t.Errorf("vote for self = false, want true")
 	}
 	msgs := r.readMessages()
@@ -219,7 +220,7 @@ func TestLeaderElectionInOneRoundRPC(t *testing.T) {
 
 		r.Step(pb.Message{From: 1, To: 1, Type: pb.MsgHup})
 		for id, vote := range tt.votes {
-			r.Step(pb.Message{From: id, To: 1, Type: pb.MsgVoteResp, Reject: !vote})
+			r.Step(pb.Message{From: id, To: 1, Term: r.Term, Type: pb.MsgVoteResp, Reject: !vote})
 		}
 
 		if r.state != tt.state {
@@ -326,7 +327,7 @@ func testNonleaderElectionTimeoutRandomized(t *testing.T, state StateType) {
 	}
 
 	for d := et + 1; d < 2*et; d++ {
-		if timeouts[d] != true {
+		if !timeouts[d] {
 			t.Errorf("timeout in %d ticks should happen", d)
 		}
 	}
@@ -381,8 +382,8 @@ func testNonleadersElectionTimeoutNonconflict(t *testing.T, state StateType) {
 		}
 	}
 
-	if g := float64(conflicts) / 1000; g > 0.4 {
-		t.Errorf("probability of conflicts = %v, want <= 0.4", g)
+	if g := float64(conflicts) / 1000; g > 0.3 {
+		t.Errorf("probability of conflicts = %v, want <= 0.3", g)
 	}
 }
 
@@ -460,7 +461,7 @@ func TestLeaderCommitEntry(t *testing.T) {
 			t.Errorf("to = %x, want %x", m.To, w)
 		}
 		if m.Type != pb.MsgApp {
-			t.Errorf("type = %s, want %s", m.Type, pb.MsgApp)
+			t.Errorf("type = %v, want %v", m.Type, pb.MsgApp)
 		}
 		if m.Commit != li+1 {
 			t.Errorf("commit = %d, want %d", m.Commit, li+1)
@@ -757,7 +758,9 @@ func TestLeaderSyncFollowerLog(t *testing.T) {
 		// first node needs the vote from the third node to become the leader.
 		n := newNetwork(lead, follower, nopStepper)
 		n.send(pb.Message{From: 1, To: 1, Type: pb.MsgHup})
-		n.send(pb.Message{From: 3, To: 1, Type: pb.MsgVoteResp, Term: 1})
+		// The election occurs in the term after the one we loaded with
+		// lead.loadState above.
+		n.send(pb.Message{From: 3, To: 1, Type: pb.MsgVoteResp, Term: term + 1})
 
 		n.send(pb.Message{From: 1, To: 1, Type: pb.MsgProp, Entries: []pb.Entry{{}}})
 
@@ -785,7 +788,7 @@ func TestVoteRequest(t *testing.T) {
 		})
 		r.readMessages()
 
-		for i := 0; i < r.electionTimeout*2; i++ {
+		for i := 1; i < r.electionTimeout*2; i++ {
 			r.tickElection()
 		}
 
@@ -913,7 +916,7 @@ func commitNoopEntry(r *raft, s *MemoryStorage) {
 		}
 		r.Step(acceptAndReply(m))
 	}
-	// ignore further messages to refresh followers' commmit index
+	// ignore further messages to refresh followers' commit index
 	r.readMessages()
 	s.Append(r.raftLog.unstableEntries())
 	r.raftLog.appliedTo(r.raftLog.committed)

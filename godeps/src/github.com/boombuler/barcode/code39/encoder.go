@@ -3,6 +3,7 @@ package code39
 
 import (
 	"errors"
+	"strconv"
 	"strings"
 
 	"github.com/boombuler/barcode"
@@ -112,7 +113,7 @@ func prepare(content string) (string, error) {
 
 // Encode returns a code39 barcode for the given content
 // if includeChecksum is set to true, a checksum character is calculated and added to the content
-func Encode(content string, includeChecksum bool, fullASCIIMode bool) (barcode.Barcode, error) {
+func Encode(content string, includeChecksum bool, fullASCIIMode bool) (barcode.BarcodeIntCS, error) {
 	if fullASCIIMode {
 		var err error
 		content, err = prepare(content)
@@ -143,5 +144,9 @@ func Encode(content string, includeChecksum bool, fullASCIIMode bool) (barcode.B
 		result.AddBit(info.data...)
 	}
 
-	return utils.New1DCode("Code 39", content, result), nil
+	checkSum, err := strconv.ParseInt(getChecksum(content), 10, 64)
+	if err != nil {
+		checkSum = 0
+	}
+	return utils.New1DCodeIntCheckSum(barcode.TypeCode39, content, result, int(checkSum)), nil
 }

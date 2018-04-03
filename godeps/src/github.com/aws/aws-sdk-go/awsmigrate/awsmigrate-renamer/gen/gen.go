@@ -1,3 +1,5 @@
+// +build go1.5,deprecated
+
 package main
 
 import (
@@ -45,7 +47,7 @@ func generateRenames(w io.Writer) error {
 	}
 
 	out := bytes.NewBuffer(nil)
-	if err := tmpl.Execute(out, exportMap); err != nil {
+	if err = tmpl.Execute(out, exportMap); err != nil {
 		return err
 	}
 

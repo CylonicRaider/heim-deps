@@ -1,4 +1,4 @@
-// Copyright 2015 CoreOS, Inc.
+// Copyright 2015 The etcd Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Package osutil implements operating system-related utility functions.
 package osutil
 
 import (
 	"os"
 	"strings"
 
-	"github.com/coreos/etcd/Godeps/_workspace/src/github.com/coreos/pkg/capnslog"
+	"github.com/coreos/pkg/capnslog"
 )
 
 var (
-	plog = capnslog.NewPackageLogger("github.com/coreos/etcd/pkg", "osutil")
+	plog = capnslog.NewPackageLogger("github.com/coreos/etcd", "pkg/osutil")
+
+	// support to override setting SIG_DFL so tests don't terminate early
+	setDflSignal = dflSignal
 )
 
 func Unsetenv(key string) error {

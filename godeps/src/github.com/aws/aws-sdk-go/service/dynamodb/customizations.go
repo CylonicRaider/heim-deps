@@ -26,8 +26,10 @@ func (d retryer) RetryRules(r *request.Request) time.Duration {
 
 func init() {
 	initClient = func(c *client.Client) {
-		if c.Config.MaxRetries == nil || aws.IntValue(c.Config.MaxRetries) == aws.UseServiceDefaultRetries {
-			c.Retryer = client.DefaultRetryer{NumMaxRetries: 10}
+		if c.Config.Retryer == nil {
+			// Only override the retryer with a custom one if the config
+			// does not already contain a retryer
+			setCustomRetryer(c)
 		}
 
 		c.Handlers.Build.PushBack(disableCompression)
@@ -35,15 +37,32 @@ func init() {
 	}
 }
 
-func drainBody(b io.ReadCloser) (out *bytes.Buffer, err error) {
-	var buf bytes.Buffer
+func setCustomRetryer(c *client.Client) {
+	maxRetries := aws.IntValue(c.Config.MaxRetries)
+	if c.Config.MaxRetries == nil || maxRetries == aws.UseServiceDefaultRetries {
+		maxRetries = 10
+	}
+
+	c.Retryer = retryer{
+		DefaultRetryer: client.DefaultRetryer{
+			NumMaxRetries: maxRetries,
+		},
+	}
+}
+
+func drainBody(b io.ReadCloser, length int64) (out *bytes.Buffer, err error) {
+	if length < 0 {
+		length = 0
+	}
+	buf := bytes.NewBuffer(make([]byte, 0, length))
+
 	if _, err = buf.ReadFrom(b); err != nil {
 		return nil, err
 	}
 	if err = b.Close(); err != nil {
 		return nil, err
 	}
-	return &buf, nil
+	return buf, nil
 }
 
 func disableCompression(r *request.Request) {
@@ -71,7 +90,7 @@ func validateCRC32(r *request.Request) {
 		return // Could not determine CRC value, skip
 	}
 
-	buf, err := drainBody(r.HTTPResponse.Body)
+	buf, err := drainBody(r.HTTPResponse.Body, r.HTTPResponse.ContentLength)
 	if err != nil { // failed to read the response body, skip
 		return
 	}

@@ -1,4 +1,4 @@
-// Copyright 2015 CoreOS, Inc.
+// Copyright 2015 The etcd Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@ package transport
 
 import (
 	"crypto/tls"
+	"net"
 	"net/http"
-	"os"
 	"testing"
 )
 
@@ -25,7 +25,12 @@ import (
 // that accepts connections.
 // TODO: verify the keepalive option is set correctly
 func TestNewKeepAliveListener(t *testing.T) {
-	ln, err := NewKeepAliveListener("127.0.0.1:0", "http", TLSInfo{})
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("unexpected listen error: %v", err)
+	}
+
+	ln, err = NewKeepAliveListener(ln, "http", nil)
 	if err != nil {
 		t.Fatalf("unexpected NewKeepAliveListener error: %v", err)
 	}
@@ -38,15 +43,24 @@ func TestNewKeepAliveListener(t *testing.T) {
 	conn.Close()
 	ln.Close()
 
+	ln, err = net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("unexpected Listen error: %v", err)
+	}
+
 	// tls
-	tmp, err := createTempFile([]byte("XXX"))
+	tlsinfo, del, err := createSelfCert()
 	if err != nil {
 		t.Fatalf("unable to create tmpfile: %v", err)
 	}
-	defer os.Remove(tmp)
-	tlsInfo := TLSInfo{CertFile: tmp, KeyFile: tmp}
+	defer del()
+	tlsInfo := TLSInfo{CertFile: tlsinfo.CertFile, KeyFile: tlsinfo.KeyFile}
 	tlsInfo.parseFunc = fakeCertificateParserFunc(tls.Certificate{}, nil)
-	tlsln, err := NewKeepAliveListener("127.0.0.1:0", "https", tlsInfo)
+	tlscfg, err := tlsInfo.ServerConfig()
+	if err != nil {
+		t.Fatalf("unexpected serverConfig error: %v", err)
+	}
+	tlsln, err := NewKeepAliveListener(ln, "https", tlscfg)
 	if err != nil {
 		t.Fatalf("unexpected NewKeepAliveListener error: %v", err)
 	}
@@ -63,8 +77,13 @@ func TestNewKeepAliveListener(t *testing.T) {
 	tlsln.Close()
 }
 
-func TestNewKeepAliveListenerTLSEmptyInfo(t *testing.T) {
-	_, err := NewListener("127.0.0.1:0", "https", TLSInfo{})
+func TestNewKeepAliveListenerTLSEmptyConfig(t *testing.T) {
+	ln, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("unexpected listen error: %v", err)
+	}
+
+	_, err = NewKeepAliveListener(ln, "https", nil)
 	if err == nil {
 		t.Errorf("err = nil, want not presented error")
 	}
