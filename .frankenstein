@@ -6,10 +6,12 @@
   "blocksize": "48M",
   "expanded": {
     "node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs": {
-      "suffix": ".fr"
+      "suffix": ".fr",
+      "mode": 493
     },
     "node_modules/puppeteer/.local-chromium/linux-543305/chrome-linux/chrome": {
-      "suffix": ".fr"
+      "suffix": ".fr",
+      "mode": 493
     }
   }
 }
