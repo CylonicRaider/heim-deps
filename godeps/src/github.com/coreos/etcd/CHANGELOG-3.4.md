@@ -1,16 +1,16 @@
 
 
-## v3.4.0 (TBD 2018-05-01)
+## v3.4.0 (TBD 2018-06-01)
 
 See [code changes](https://github.com/coreos/etcd/compare/v3.3.0...v3.4.0) and [v3.4 upgrade guide](https://github.com/coreos/etcd/blob/master/Documentation/upgrades/upgrade_3_4.md) for any breaking changes.
 
 ### Improved
 
-- TODO: Rewrite [client balancer](TODO) with [new gRPC balancer interface](TODO).
+- Rewrite [client balancer](TODO) with [new gRPC balancer interface](TODO).
 - Add [jitter to watch progress notify](https://github.com/coreos/etcd/pull/9278) to prevent [spikes in `etcd_network_client_grpc_sent_bytes_total`](https://github.com/coreos/etcd/issues/9246).
 - Improve [slow requests warning logging](https://github.com/coreos/etcd/pull/9288).
   - e.g. `etcdserver: read-only range request "key:\"\\000\" range_end:\"\\000\" " took too long [3.389041388s] to execute`
-- Improve [TLS setup error logging](https://github.com/coreos/etcd/pull/9518) for [better debugging experience](https://github.com/coreos/etcd/issues/9400).
+- Improve [TLS setup error logging](https://github.com/coreos/etcd/pull/9518) to help debug [TLS-enabled cluster configuring issues](https://github.com/coreos/etcd/issues/9400).
 - Improve [long-running concurrent read transactions under light write workloads](https://github.com/coreos/etcd/pull/9296).
   - Previously, periodic commit on pending writes blocks incoming read transactions, even if there is no pending write.
   - Now, periodic commit operation does not block concurrent read transactions, thus improves long-running read transaction performance.
@@ -30,6 +30,10 @@ See [code changes](https://github.com/coreos/etcd/compare/v3.3.0...v3.4.0) and [
   - Futhermore, when `--auto-compaction-mode=periodic --auto-compaction-retention=30m` and writes per minute are about 1000, `v3.3.0`, `v3.3.1`, and `v3.3.2` compact revision 30000, 33000, and 36000, for every 3-minute, while `v3.3.3` *or later* compacts revision 30000, 60000, and 90000, for every 30-minute.
 - Improve [lease expire/revoke operation performance](https://github.com/coreos/etcd/pull/9418), address [lease scalability issue](https://github.com/coreos/etcd/issues/9496).
 - Make [Lease `Lookup` non-blocking with concurrent `Grant`/`Revoke`](https://github.com/coreos/etcd/pull/9229).
+- Make etcd server return `raft.ErrProposalDropped` on internal Raft proposal drop in [v3 applier](https://github.com/coreos/etcd/pull/9549) and [v2 applier](https://github.com/coreos/etcd/pull/9558).
+  - e.g. a node is removed from cluster, or [`raftpb.MsgProp` arrives at current leader while there is an ongoing leadership transfer](https://github.com/coreos/etcd/issues/8975).
+- Add [`snapshot`](https://github.com/coreos/etcd/pull/9118) package for easier snapshot workflow (see [`godoc.org/github.com/etcd/snapshot`](https://godoc.org/github.com/coreos/etcd/snapshot) for more).
+- Improve [functional tester](https://github.com/coreos/etcd/tree/master/functional) coverage: [proxy layer to run network fault tests in CI](https://github.com/coreos/etcd/pull/9081), [TLS is enabled both for server and client](https://github.com/coreos/etcd/pull/9534), [liveness mode](https://github.com/coreos/etcd/issues/9230), [shuffle test sequence](https://github.com/coreos/etcd/issues/9381), [membership reconfiguration failure cases](https://github.com/coreos/etcd/pull/9564), [disastrous quorum loss and snapshot recover from a seed member](https://github.com/coreos/etcd/pull/9565).
 
 ### Breaking Changes
 
@@ -63,16 +67,23 @@ See [code changes](https://github.com/coreos/etcd/compare/v3.3.0...v3.4.0) and [
   - 3.4 moves `cmd/vendor` directory to `vendor` at repository root.
   - Remove recursive symlinks in `cmd` directory.
   - Now `go get/install/build` on `etcd` packages (e.g. `clientv3`, `tools/benchmark`) enforce builds with etcd `vendor` directory.
+- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) endpoint `/v3beta` with [`/v3`](https://github.com/coreos/etcd/pull/9298).
+  - Deprecated [`/v3alpha`](https://github.com/coreos/etcd/pull/9298).
 
 ### Dependency
 
-- TODO: Upgrade [`google.golang.org/grpc`](https://github.com/grpc/grpc-go/releases) from [**`v1.7.5`**](https://github.com/grpc/grpc-go/releases/tag/v1.7.5) to [**`v1.11.0`**](https://github.com/grpc/grpc-go/releases/tag/v1.11.0).
+- Upgrade [`google.golang.org/grpc`](https://github.com/grpc/grpc-go/releases) from [**`v1.7.5`**](https://github.com/grpc/grpc-go/releases/tag/v1.7.5) to [**`v1.11.1`**](TODO).
+- Upgrade [`github.com/ugorji/go/codec`](https://github.com/ugorji/go) to [**`v1.1.1`**](https://github.com/ugorji/go/releases/tag/v1.1.1), and [regenerate v2 `client`](https://github.com/coreos/etcd/pull/9494).
 - Upgrade [`github.com/soheilhy/cmux`](https://github.com/soheilhy/cmux/releases) from [**`v0.1.3`**](https://github.com/soheilhy/cmux/releases/tag/v0.1.3) to [**`v0.1.4`**](https://github.com/soheilhy/cmux/releases/tag/v0.1.4).
+- Upgrade [`github.com/spf13/cobra`](https://github.com/spf13/cobra/releases) from [**`spf13/cobra@1c44ec8d3`**](https://github.com/spf13/cobra/commit/1c44ec8d3f1552cac48999f9306da23c4d8a288b) to [**`spf13/cobra@cd30c2a7e`**](https://github.com/spf13/cobra/commit/cd30c2a7e91a1d63fd9a0027accf18a681e9d50b).
+- Upgrade [`github.com/spf13/pflag`](https://github.com/spf13/pflag/releases) from [**`v1.0.0`**](https://github.com/spf13/pflag/releases/tag/v1.0.0) to [**`spf13/pflag@1ce0cc6db`**](https://github.com/spf13/pflag/commit/1ce0cc6db4029d97571db82f85092fccedb572ce).
 
 ### Metrics, Monitoring
 
 - Add [`etcd_debugging_mvcc_db_total_size_in_use_in_bytes`](https://github.com/coreos/etcd/pull/9256) Prometheus metric.
 - Add missing [`etcd_network_peer_sent_failures_total` count](https://github.com/coreos/etcd/pull/9437).
+- Fix [`etcd_debugging_server_lease_expired_total`](https://github.com/coreos/etcd/pull/9557) Prometheus metric.
+- Fix [race conditions in v2 server stat collecting](https://github.com/coreos/etcd/pull/9562).
 
 ### Security, Authentication
 
@@ -88,10 +99,11 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
   - When specifying hostnames, loopback addresses are not added automatically. To allow loopback interfaces, add them to whitelist manually (e.g. `"localhost"`, `"127.0.0.1"`, etc.).
   - e.g. `etcd --host-whitelist example.com`, then the server will reject all HTTP requests whose Host field is not `example.com` (also rejects requests to `"localhost"`).
 - Support [`etcd --cors`](https://github.com/coreos/etcd/pull/9490) in v3 HTTP requests (gRPC gateway).
-- TODO: Support [TLS cipher suite lists](TODO).
+- Support [TLS cipher suite lists](TODO).
 - Support [`ttl` field for `etcd` Authentication JWT token](https://github.com/coreos/etcd/pull/8302).
   - e.g. `etcd --auth-token jwt,pub-key=<pub key path>,priv-key=<priv key path>,sign-method=<sign method>,ttl=5m`.
 - Allow empty token provider in [`etcdserver.ServerConfig.AuthToken`](https://github.com/coreos/etcd/pull/9369).
+- Fix [TLS reload](TODO) when [cert SAN field only contains IP addresses](https://github.com/coreos/etcd/issues/9541).
 
 ### Added: `etcd`
 
@@ -99,11 +111,11 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
   - For instance, a flaky(or rejoining) member may drop in and out, and start campaign. This member will end up with a higher term, and ignore all incoming messages with lower term. In this case, a new leader eventually need to get elected, thus disruptive to cluster availability. Raft implements Pre-Vote phase to prevent this kind of disruptions. If enabled, Raft runs an additional phase of election to check if pre-candidate can get enough votes to win an election.
   - `--pre-vote=false` by default.
   - v3.5 will enable `--pre-vote=true` by default.
-- TODO: [`--initial-corrupt-check`](TODO) flag is now stable (`--experimental-initial-corrupt-check` is deprecated).
+- [`--initial-corrupt-check`](TODO) flag is now stable (`--experimental-initial-corrupt-check` is deprecated).
   - `--initial-corrupt-check=true` by default, to check cluster database hashes before serving client/peer traffic.
-- TODO: [`--corrupt-check-time`](TODO) flag is now stable (`--experimental-corrupt-check-time` is deprecated).
+- [`--corrupt-check-time`](TODO) flag is now stable (`--experimental-corrupt-check-time` is deprecated).
   - `--corrupt-check-time=12h` by default, to check cluster database hashes for every 12-hour.
-- TODO: [`--enable-v2v3`](TODO) flag is now stable (`--experimental-enable-v2v3` is deprecated).
+- [`--enable-v2v3`](TODO) flag is now stable (`--experimental-enable-v2v3` is deprecated).
   - `--enable-v2=true --enable-v2v3=''` by default, to enable v2 API server that is backed by **v2 store**.
   - `--enable-v2=true --enable-v2v3=/aaa` to enable v2 API server that is backed by **v3 storage**.
   - `--enable-v2=false --enable-v2v3=''` to disable v2 API server.
@@ -117,12 +129,14 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
 
 ### Added: `embed`
 
+- Add [`embed.Config.Logger`](https://github.com/coreos/etcd/pull/9518) to use [structured logger `zap`](https://github.com/uber-go/zap) in server-side.
+  - make this configurable...
 - Define [`embed.CompactorModePeriodic`](https://godoc.org/github.com/coreos/etcd/embed#pkg-variables) for `compactor.ModePeriodic`.
 - Define [`embed.CompactorModeRevision`](https://godoc.org/github.com/coreos/etcd/embed#pkg-variables) for `compactor.ModeRevision`.
 
 ### Added: API
 
-- Add [`snapshot`](https://github.com/coreos/etcd/pull/9118) package for snapshot restore/save operations.
+- Add [`snapshot`](https://github.com/coreos/etcd/pull/9118) package for snapshot restore/save operations (see [`godoc.org/github.com/etcd/snapshot`](https://godoc.org/github.com/coreos/etcd/snapshot) for more).
 - Add [`watch_id` field to `etcdserverpb.WatchCreateRequest`](https://github.com/coreos/etcd/pull/9065), allow user-provided watch ID to `mvcc`.
   - Corresponding `watch_id` is returned via `etcdserverpb.WatchResponse`, if any.
 - Add [`raftAppliedIndex` field to `etcdserverpb.StatusResponse`](https://github.com/coreos/etcd/pull/9176) for current Raft applied index.
@@ -138,10 +152,12 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
 - Add [`defrag --cluster`](https://github.com/coreos/etcd/pull/9390) flag.
 - Add ["raft applied index" field to `endpoint status`](https://github.com/coreos/etcd/pull/9176).
 - Add ["errors" field to `endpoint status`](https://github.com/coreos/etcd/pull/9206).
+- Add [`endpoint health --write-out` support](https://github.com/coreos/etcd/pull/9540).
+  - Previously, [`endpoint health --write-out json` did not work](https://github.com/coreos/etcd/issues/9532).
 
 ### Added: gRPC gateway
 
-- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) `/v3beta` with [`/v3`](https://github.com/coreos/etcd/pull/9298).
+- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) endpoint `/v3beta` with [`/v3`](https://github.com/coreos/etcd/pull/9298).
   - Deprecated [`/v3alpha`](https://github.com/coreos/etcd/pull/9298).
   - To deprecate [`/v3beta`](https://github.com/coreos/etcd/issues/9189) in `v3.5`.
 - Add API endpoints [`/{v3beta,v3}/lease/leases, /{v3beta,v3}/lease/revoke, /{v3beta,v3}/lease/timetolive`](https://github.com/coreos/etcd/pull/9450).
@@ -152,8 +168,8 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
 
 - Fix [deadlock during PreVote migration process](https://github.com/coreos/etcd/pull/8525).
 - Add [`raft.ErrProposalDropped`](https://github.com/coreos/etcd/pull/9067).
-  - Now `(r *raft) Step` returns `raft.ErrProposalDropped` if a proposal has been ignored.
-  - e.g. a node is removed from cluster, [ongoing leadership transfer](https://github.com/coreos/etcd/issues/8975), etc.
+  - Now [`(r *raft) Step` returns `raft.ErrProposalDropped`](https://github.com/coreos/etcd/pull/9137) if a proposal has been ignored.
+  - e.g. a node is removed from cluster, or [`raftpb.MsgProp` arrives at current leader while there is an ongoing leadership transfer](https://github.com/coreos/etcd/issues/8975).
 - Improve [Raft `becomeLeader` and `stepLeader`](https://github.com/coreos/etcd/pull/9073) by keeping track of latest `pb.EntryConfChange` index.
   - Previously record `pendingConf` boolean field scanning the entire tail of the log, which can delay hearbeat send.
 - Fix [missing learner nodes on `(n *node) ApplyConfChange`](https://github.com/coreos/etcd/pull/9116).

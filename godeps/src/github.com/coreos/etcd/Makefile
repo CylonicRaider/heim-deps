@@ -24,6 +24,7 @@ clean:
 	rm -f ./bin/Dockerfile-release
 	rm -rf ./bin/*.etcd
 	rm -rf ./gopath
+	rm -rf ./gopath.proto
 	rm -rf ./release
 	rm -f ./integration/127.0.0.1:* ./integration/localhost:*
 	rm -f ./clientv3/integration/127.0.0.1:* ./clientv3/integration/localhost:*
@@ -74,11 +75,11 @@ endif
 
 build-docker-test:
 	$(info GO_VERSION: $(GO_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./Dockerfile-test
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/Dockerfile
 	docker build \
 	  --tag gcr.io/etcd-development/etcd-test:go$(GO_VERSION) \
-	  --file ./Dockerfile-test .
-	@mv ./Dockerfile-test.bak ./Dockerfile-test
+	  --file ./tests/Dockerfile .
+	@mv ./tests/Dockerfile.bak ./tests/Dockerfile
 
 push-docker-test:
 	$(info GO_VERSION: $(GO_VERSION))
@@ -117,7 +118,7 @@ compile-setup-gopath-with-docker-test:
 #
 # Local machine:
 #   TEST_OPTS="PASSES='fmt'" make test
-#   TEST_OPTS="PASSES='fmt bom dep compile build unit'" make test
+#   TEST_OPTS="PASSES='fmt bom dep build unit'" make test
 #   TEST_OPTS="PASSES='build unit release integration_e2e functional'" make test
 #   TEST_OPTS="PASSES='build grpcproxy'" make test
 #
@@ -127,7 +128,7 @@ compile-setup-gopath-with-docker-test:
 #   TEST_OPTS="VERBOSE=2 PASSES='unit'" make docker-test
 #
 # Travis CI (test with docker):
-#   TEST_OPTS="PASSES='fmt bom dep compile build unit'" make docker-test
+#   TEST_OPTS="PASSES='fmt bom dep build unit'" make docker-test
 #
 # Semaphore CI (test with docker):
 #   TEST_OPTS="PASSES='build unit release integration_e2e functional'" make docker-test
@@ -218,12 +219,12 @@ push-docker-release-master:
 
 build-docker-static-ip-test:
 	$(info GO_VERSION: $(GO_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./scripts/docker-static-ip/Dockerfile
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-static-ip/Dockerfile
 	docker build \
 	  --tag gcr.io/etcd-development/etcd-static-ip-test:go$(GO_VERSION) \
-	  --file ./scripts/docker-static-ip/Dockerfile \
-	  ./scripts/docker-static-ip
-	@mv ./scripts/docker-static-ip/Dockerfile.bak ./scripts/docker-static-ip/Dockerfile
+	  --file ./tests/docker-static-ip/Dockerfile \
+	  ./tests/docker-static-ip
+	@mv ./tests/docker-static-ip/Dockerfile.bak ./tests/docker-static-ip/Dockerfile
 
 push-docker-static-ip-test:
 	$(info GO_VERSION: $(GO_VERSION))
@@ -242,7 +243,7 @@ docker-static-ip-test-certs-run:
 	  --tty \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-static-ip/certs,destination=/certs \
+	  --mount type=bind,source=`pwd`/tests/docker-static-ip/certs,destination=/certs \
 	  gcr.io/etcd-development/etcd-static-ip-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs/run.sh && rm -rf m*.etcd"
 
@@ -255,7 +256,7 @@ docker-static-ip-test-certs-metrics-proxy-run:
 	  --tty \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-static-ip/certs-metrics-proxy,destination=/certs-metrics-proxy \
+	  --mount type=bind,source=`pwd`/tests/docker-static-ip/certs-metrics-proxy,destination=/certs-metrics-proxy \
 	  gcr.io/etcd-development/etcd-static-ip-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-metrics-proxy/run.sh && rm -rf m*.etcd"
 
@@ -281,12 +282,12 @@ docker-static-ip-test-certs-metrics-proxy-run:
 
 build-docker-dns-test:
 	$(info GO_VERSION: $(GO_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./scripts/docker-dns/Dockerfile
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-dns/Dockerfile
 	docker build \
 	  --tag gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
-	  --file ./scripts/docker-dns/Dockerfile \
-	  ./scripts/docker-dns
-	@mv ./scripts/docker-dns/Dockerfile.bak ./scripts/docker-dns/Dockerfile
+	  --file ./tests/docker-dns/Dockerfile \
+	  ./tests/docker-dns
+	@mv ./tests/docker-dns/Dockerfile.bak ./tests/docker-dns/Dockerfile
 
 	docker run \
 	  --rm \
@@ -312,7 +313,7 @@ docker-dns-test-insecure-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/insecure,destination=/insecure \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/insecure,destination=/insecure \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /insecure/run.sh && rm -rf m*.etcd"
 
@@ -326,7 +327,7 @@ docker-dns-test-certs-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/certs,destination=/certs \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/certs,destination=/certs \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs/run.sh && rm -rf m*.etcd"
 
@@ -340,7 +341,7 @@ docker-dns-test-certs-gateway-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/certs-gateway,destination=/certs-gateway \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/certs-gateway,destination=/certs-gateway \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-gateway/run.sh && rm -rf m*.etcd"
 
@@ -354,7 +355,7 @@ docker-dns-test-certs-wildcard-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/certs-wildcard,destination=/certs-wildcard \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/certs-wildcard,destination=/certs-wildcard \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-wildcard/run.sh && rm -rf m*.etcd"
 
@@ -368,7 +369,7 @@ docker-dns-test-certs-common-name-auth-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/certs-common-name-auth,destination=/certs-common-name-auth \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/certs-common-name-auth,destination=/certs-common-name-auth \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-common-name-auth/run.sh && rm -rf m*.etcd"
 
@@ -382,7 +383,7 @@ docker-dns-test-certs-common-name-multi-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns/certs-common-name-multi,destination=/certs-common-name-multi \
+	  --mount type=bind,source=`pwd`/tests/docker-dns/certs-common-name-multi,destination=/certs-common-name-multi \
 	  gcr.io/etcd-development/etcd-dns-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-common-name-multi/run.sh && rm -rf m*.etcd"
 
@@ -402,12 +403,12 @@ docker-dns-test-certs-common-name-multi-run:
 
 build-docker-dns-srv-test:
 	$(info GO_VERSION: $(GO_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./scripts/docker-dns-srv/Dockerfile
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./tests/docker-dns-srv/Dockerfile
 	docker build \
 	  --tag gcr.io/etcd-development/etcd-dns-srv-test:go$(GO_VERSION) \
-	  --file ./scripts/docker-dns-srv/Dockerfile \
-	  ./scripts/docker-dns-srv
-	@mv ./scripts/docker-dns-srv/Dockerfile.bak ./scripts/docker-dns-srv/Dockerfile
+	  --file ./tests/docker-dns-srv/Dockerfile \
+	  ./tests/docker-dns-srv
+	@mv ./tests/docker-dns-srv/Dockerfile.bak ./tests/docker-dns-srv/Dockerfile
 
 	docker run \
 	  --rm \
@@ -433,7 +434,7 @@ docker-dns-srv-test-certs-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns-srv/certs,destination=/certs \
+	  --mount type=bind,source=`pwd`/tests/docker-dns-srv/certs,destination=/certs \
 	  gcr.io/etcd-development/etcd-dns-srv-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs/run.sh && rm -rf m*.etcd"
 
@@ -447,7 +448,7 @@ docker-dns-srv-test-certs-gateway-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns-srv/certs-gateway,destination=/certs-gateway \
+	  --mount type=bind,source=`pwd`/tests/docker-dns-srv/certs-gateway,destination=/certs-gateway \
 	  gcr.io/etcd-development/etcd-dns-srv-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-gateway/run.sh && rm -rf m*.etcd"
 
@@ -461,53 +462,55 @@ docker-dns-srv-test-certs-wildcard-run:
 	  --dns 127.0.0.1 \
 	  $(TMP_DIR_MOUNT_FLAG) \
 	  --mount type=bind,source=`pwd`/bin,destination=/etcd \
-	  --mount type=bind,source=`pwd`/scripts/docker-dns-srv/certs-wildcard,destination=/certs-wildcard \
+	  --mount type=bind,source=`pwd`/tests/docker-dns-srv/certs-wildcard,destination=/certs-wildcard \
 	  gcr.io/etcd-development/etcd-dns-srv-test:go$(GO_VERSION) \
 	  /bin/bash -c "cd /etcd && /certs-wildcard/run.sh && rm -rf m*.etcd"
 
 
 
 # Example:
-#   make build-etcd-test-proxy
+#   make build-functional
+#   make build-docker-functional
+#   make push-docker-functional
+#   make pull-docker-functional
 
-build-etcd-test-proxy:
-	go build -v -o ./bin/etcd-test-proxy ./tools/etcd-test-proxy
-
-
-
-# Example:
-#   make build-docker-functional-tester
-#   make push-docker-functional-tester
-#   make pull-docker-functional-tester
-
-build-docker-functional-tester:
+build-functional:
 	$(info GO_VERSION: $(GO_VERSION))
 	$(info ETCD_VERSION: $(ETCD_VERSION))
-	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./Dockerfile-functional-tester
+	./functional/build
+	./bin/etcd-agent -help || true && \
+	  ./bin/etcd-proxy -help || true && \
+	  ./bin/etcd-runner --help || true && \
+	  ./bin/etcd-tester -help || true
+
+build-docker-functional:
+	$(info GO_VERSION: $(GO_VERSION))
+	$(info ETCD_VERSION: $(ETCD_VERSION))
+	@sed -i.bak 's|REPLACE_ME_GO_VERSION|$(GO_VERSION)|g' ./functional/Dockerfile
 	docker build \
-	  --tag gcr.io/etcd-development/etcd-functional-tester:go$(GO_VERSION) \
-	  --file ./Dockerfile-functional-tester \
+	  --tag gcr.io/etcd-development/etcd-functional:go$(GO_VERSION) \
+	  --file ./functional/Dockerfile \
 	  .
-	@mv ./Dockerfile-functional-tester.bak ./Dockerfile-functional-tester
+	@mv ./functional/Dockerfile.bak ./functional/Dockerfile
 
 	docker run \
 	  --rm \
-	  gcr.io/etcd-development/etcd-functional-tester:go$(GO_VERSION) \
+	  gcr.io/etcd-development/etcd-functional:go$(GO_VERSION) \
 	  /bin/bash -c "./bin/etcd --version && \
 	   ./bin/etcd-failpoints --version && \
 	   ETCDCTL_API=3 ./bin/etcdctl version && \
 	   ./bin/etcd-agent -help || true && \
-	   ./bin/etcd-tester -help || true && \
+	   ./bin/etcd-proxy -help || true && \
 	   ./bin/etcd-runner --help || true && \
-	   ./bin/benchmark --help || true && \
-	   ./bin/etcd-test-proxy -help || true"
+	   ./bin/etcd-tester -help || true && \
+	   ./bin/benchmark --help || true"
 
-push-docker-functional-tester:
+push-docker-functional:
 	$(info GO_VERSION: $(GO_VERSION))
 	$(info ETCD_VERSION: $(ETCD_VERSION))
-	gcloud docker -- push gcr.io/etcd-development/etcd-functional-tester:go$(GO_VERSION)
+	gcloud docker -- push gcr.io/etcd-development/etcd-functional:go$(GO_VERSION)
 
-pull-docker-functional-tester:
+pull-docker-functional:
 	$(info GO_VERSION: $(GO_VERSION))
 	$(info ETCD_VERSION: $(ETCD_VERSION))
-	docker pull gcr.io/etcd-development/etcd-functional-tester:go$(GO_VERSION)
+	docker pull gcr.io/etcd-development/etcd-functional:go$(GO_VERSION)

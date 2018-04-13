@@ -1,5 +1,19 @@
 
 
+## [v3.3.4](https://github.com/coreos/etcd/releases/tag/v3.3.4) (2018-04-TBD)
+
+See [code changes](https://github.com/coreos/etcd/compare/v3.3.3...v3.3.4) and [v3.3 upgrade guide](https://github.com/coreos/etcd/blob/master/Documentation/upgrades/upgrade_3_3.md) for any breaking changes.
+
+### Metrics, Monitoring
+
+- Fix [`etcd_debugging_server_lease_expired_total`](https://github.com/coreos/etcd/pull/9557) Prometheus metric.
+- Fix [race conditions in v2 server stat collecting](https://github.com/coreos/etcd/pull/9562).
+
+### Security, Authentication
+
+- Fix [TLS reload](TODO) when [cert SAN field only contains IP addresses](https://github.com/coreos/etcd/issues/9541).
+
+
 ## [v3.3.3](https://github.com/coreos/etcd/releases/tag/v3.3.3) (2018-03-29)
 
 See [code changes](https://github.com/coreos/etcd/compare/v3.3.2...v3.3.3) and [v3.3 upgrade guide](https://github.com/coreos/etcd/blob/master/Documentation/upgrades/upgrade_3_3.md) for any breaking changes.
@@ -113,15 +127,16 @@ See [code changes](https://github.com/coreos/etcd/compare/v3.2.0...v3.3.0) and [
 - Translate [gRPC status error in v3 client `Snapshot` API](https://github.com/coreos/etcd/pull/9038).
 - v3 `etcdctl` [`lease timetolive LEASE_ID`](https://github.com/coreos/etcd/issues/9028) on expired lease now prints [`"lease LEASE_ID already expired"`](https://github.com/coreos/etcd/pull/9047).
   - <=3.2 prints `"lease LEASE_ID granted with TTL(0s), remaining(-1s)"`.
+- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) endpoint `/v3alpha` with [`/v3beta`](https://github.com/coreos/etcd/pull/8880).
 
 ### Dependency
 
 - Upgrade [`boltdb/bolt`](https://github.com/boltdb/bolt#project-status) from [**`v1.3.0`**](https://github.com/boltdb/bolt/releases/tag/v1.3.0) to [`coreos/bbolt`](https://github.com/coreos/bbolt/releases) [**`v1.3.1-coreos.6`**](https://github.com/coreos/bbolt/releases/tag/v1.3.1-coreos.6).
 - Upgrade [`google.golang.org/grpc`](https://github.com/grpc/grpc-go/releases) from [**`v1.2.1`**](https://github.com/grpc/grpc-go/releases/tag/v1.2.1) to [**`v1.7.5`**](https://github.com/grpc/grpc-go/releases/tag/v1.7.5).
-- Upgrade [`github.com/ugorji/go/codec`](https://github.com/ugorji/go) to [**`v1.1`**](https://github.com/ugorji/go/commit/bdcc60b419d136a85cdf2e7cbcac34b3f1cd6e57), and [regenerate v2 `client`](https://github.com/coreos/etcd/pull/8721).
-- Upgrade [`github.com/ugorji/go/codec`](https://github.com/ugorji/go) to [**`ugorji/go@54210f4`**](https://github.com/ugorji/go/commit/54210f4e076c57f351166f0ed60e67d3fca57a36), and [regenerate v2 `client`](https://github.com/coreos/etcd/pull/8574).
+- Upgrade [`github.com/ugorji/go/codec`](https://github.com/ugorji/go) to [**`v1.1`**](https://github.com/ugorji/go/releases/tag/v1.1), and [regenerate v2 `client`](https://github.com/coreos/etcd/pull/8721).
+- Upgrade [`github.com/ugorji/go/codec`](https://github.com/ugorji/go) to [**`ugorji/go@54210f4e0`**](https://github.com/ugorji/go/commit/54210f4e076c57f351166f0ed60e67d3fca57a36), and [regenerate v2 `client`](https://github.com/coreos/etcd/pull/8574).
 - Upgrade [`github.com/grpc-ecosystem/grpc-gateway`](https://github.com/grpc-ecosystem/grpc-gateway/releases) from [**`v1.2.2`**](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.2.2) to [**`v1.3.0`**](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v1.3.0).
-- Upgrade [`golang.org/x/crypto/bcrypt`](https://github.com/golang/crypto) to [**`golang/crypto@6c586e1`**](https://github.com/golang/crypto/commit/6c586e17d90a7d08bbbc4069984180dce3b04117).
+- Upgrade [`golang.org/x/crypto/bcrypt`](https://github.com/golang/crypto) to [**`golang/crypto@6c586e17d`**](https://github.com/golang/crypto/commit/6c586e17d90a7d08bbbc4069984180dce3b04117).
 
 ### Metrics, Monitoring
 
@@ -289,7 +304,7 @@ See [security doc](https://github.com/coreos/etcd/blob/master/Documentation/op-g
 
 ### Added: gRPC gateway
 
-- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) `/v3alpha` with [`/v3beta`](https://github.com/coreos/etcd/pull/8880).
+- Replace [gRPC gateway](https://github.com/grpc-ecosystem/grpc-gateway) endpoint `/v3alpha` with [`/v3beta`](https://github.com/coreos/etcd/pull/8880).
   - To deprecate [`/v3alpha`](https://github.com/coreos/etcd/issues/8125) in `v3.4`.
 - Support ["authorization" token](https://github.com/coreos/etcd/pull/7999).
 - Support [websocket for bi-directional streams](https://github.com/coreos/etcd/pull/8257).

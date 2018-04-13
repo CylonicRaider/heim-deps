@@ -23,7 +23,7 @@ etcd is a distributed reliable key-value store for the most critical data of a d
 
 etcd is written in Go and uses the [Raft][raft] consensus algorithm to manage a highly-available replicated log.
 
-etcd is used [in production by many companies](./Documentation/production-users.md), and the development team stands behind it in critical deployment scenarios, where etcd is frequently teamed with applications such as [Kubernetes][k8s], [locksmith][locksmith], [vulcand][vulcand], [Doorman][doorman], and many others. Reliability is further ensured by rigorous [testing][etcd-tests].
+etcd is used [in production by many companies](./Documentation/production-users.md), and the development team stands behind it in critical deployment scenarios, where etcd is frequently teamed with applications such as [Kubernetes][k8s], [locksmith][locksmith], [vulcand][vulcand], [Doorman][doorman], and many others. Reliability is further ensured by [**rigorous testing**](https://github.com/coreos/etcd/tree/master/functional).
 
 See [etcdctl][etcdctl] for a simple command line client.
 
@@ -33,26 +33,25 @@ See [etcdctl][etcdctl] for a simple command line client.
 [locksmith]: https://github.com/coreos/locksmith
 [vulcand]: https://github.com/vulcand/vulcand
 [etcdctl]: https://github.com/coreos/etcd/tree/master/etcdctl
-[etcd-tests]: http://dash.etcd.io
 
 ## Community meetings
 
-etcd contributors and maintainers have bi-weekly meetings at 11:00 AM (USA Pacific) on Tuesdays. There is an [iCalendar][rfc5545] format for the meetings [here](meeting.ics). Anyone is welcome to join via [Zoom][zoom] or audio-only: +1 669 900 6833. An initial agenda will be posted to the [shared Google docs][shared-meeting-notes] a day before each meeting, and everyone is welcome to suggest additional topics or other agendas.
+etcd contributors and maintainers have bi-weekly meetings at 11:00 AM (USA Pacific) on Tuesdays. Anyone is welcome to join via [BlueJeans][bluejeans]. An initial agenda will be posted to the [shared Google docs][shared-meeting-notes] a day before each meeting, and everyone is welcome to suggest additional topics or other agendas.
 
-[rfc5545]: https://tools.ietf.org/html/rfc5545
-[zoom]: https://coreos.zoom.us/j/854793406
+[bluejeans]: https://bluejeans.com/2732309610
 [shared-meeting-notes]: https://docs.google.com/document/d/1DbVXOHvd9scFsSmL2oNg4YGOHJdXqtx583DmeVWrB_M/edit#
 
 ## Getting started
 
 ### Getting etcd
 
-The easiest way to get etcd is to use one of the pre-built release binaries which are available for OSX, Linux, Windows, [rkt][rkt], and Docker. Instructions for using these binaries are on the [GitHub releases page][github-release].
+The easiest way to get etcd is to use one of the pre-built release binaries which are available for OSX, Linux, Windows, and Docker on the [release page][github-release].
+
+For more installation guides, please check out [play.etcd.io](http://play.etcd.io) and [operating etcd](https://github.com/coreos/etcd/tree/master/Documentation#operating-etcd-clusters).
 
 For those wanting to try the very latest version, [build the latest version of etcd][dl-build] from the `master` branch. This first needs [*Go*](https://golang.org/) installed (version 1.10+ is required). All development occurs on `master`, including new features and bug fixes. Bug fixes are first targeted at `master` and subsequently ported to release branches, as described in the [branch management][branch-management] guide.
 
-[rkt]: https://github.com/rkt/rkt/releases/
-[github-release]: https://github.com/coreos/etcd/releases/
+[github-release]: https://github.com/coreos/etcd/releases
 [branch-management]: ./Documentation/branch_management.md
 [dl-build]: ./Documentation/dl_build.md#build-the-latest-version
 
@@ -69,7 +68,6 @@ The etcd command can be simply run as such if it is moved to the system path as 
 
 ```sh
 mv /tmp/etcd-download-test/etcd /usr/local/bin/
-
 etcd
 ```
 
@@ -88,13 +86,10 @@ ETCDCTL_API=3 etcdctl put mykey "this is awesome"
 ETCDCTL_API=3 etcdctl get mykey
 ```
 
-That's it! etcd is now running and serving client requests. For more
+etcd is now running and serving client requests. For more, please check out:
 
-- [Animated quick demo][demo-gif]
-- [Interactive etcd playground][etcd-play]
-
-[demo-gif]: ./Documentation/demo.md
-[etcd-play]: http://play.etcd.io/
+- [Interactive etcd playground](http://play.etcd.io)
+- [Animated quick demo](./Documentation/demo.md)
 
 ### etcd TCP ports
 

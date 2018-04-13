@@ -25,6 +25,7 @@ import (
 	"os"
 	"path/filepath"
 	"reflect"
+	"time"
 
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/etcdserver"
@@ -35,7 +36,6 @@ import (
 	"github.com/coreos/etcd/mvcc"
 	"github.com/coreos/etcd/mvcc/backend"
 	"github.com/coreos/etcd/pkg/fileutil"
-	"github.com/coreos/etcd/pkg/logutil"
 	"github.com/coreos/etcd/pkg/types"
 	"github.com/coreos/etcd/raft"
 	"github.com/coreos/etcd/raft/raftpb"
@@ -44,22 +44,103 @@ import (
 	"github.com/coreos/etcd/wal/walpb"
 
 	bolt "github.com/coreos/bbolt"
+	"go.uber.org/zap"
 )
 
 // Manager defines snapshot methods.
 type Manager interface {
-	// Save fetches snapshot from remote etcd server and saves data to target path.
-	// If the context "ctx" is canceled or timed out, snapshot save stream will error out
-	// (e.g. context.Canceled, context.DeadlineExceeded).
-	Save(ctx context.Context, dbPath string) error
+	// Save fetches snapshot from remote etcd server and saves data
+	// to target path. If the context "ctx" is canceled or timed out,
+	// snapshot save stream will error out (e.g. context.Canceled,
+	// context.DeadlineExceeded). Make sure to specify only one endpoint
+	// in client configuration. Snapshot API must be requested to a
+	// selected node, and saved snapshot is the point-in-time state of
+	// the selected node.
+	Save(ctx context.Context, cfg clientv3.Config, dbPath string) error
 
 	// Status returns the snapshot file information.
 	Status(dbPath string) (Status, error)
 
-	// Restore restores a new etcd data directory from given snapshot file.
-	// It returns an error if specified data directory already exists, to
-	// prevent unintended data directory overwrites.
-	Restore(dbPath string, cfg RestoreConfig) error
+	// Restore restores a new etcd data directory from given snapshot
+	// file. It returns an error if specified data directory already
+	// exists, to prevent unintended data directory overwrites.
+	Restore(cfg RestoreConfig) error
+}
+
+// NewV3 returns a new snapshot Manager for v3.x snapshot.
+func NewV3(lg *zap.Logger) Manager {
+	if lg == nil {
+		lg = zap.NewExample()
+	}
+	return &v3Manager{lg: lg}
+}
+
+type v3Manager struct {
+	lg *zap.Logger
+
+	name    string
+	dbPath  string
+	walDir  string
+	snapDir string
+	cl      *membership.RaftCluster
+
+	skipHashCheck bool
+}
+
+// Save fetches snapshot from remote etcd server and saves data to target path.
+func (s *v3Manager) Save(ctx context.Context, cfg clientv3.Config, dbPath string) error {
+	if len(cfg.Endpoints) != 1 {
+		return fmt.Errorf("snapshot must be requested to one selected node, not multiple %v", cfg.Endpoints)
+	}
+	cli, err := clientv3.New(cfg)
+	if err != nil {
+		return err
+	}
+	defer cli.Close()
+
+	partpath := dbPath + ".part"
+	defer os.RemoveAll(partpath)
+
+	var f *os.File
+	f, err = os.Create(partpath)
+	if err != nil {
+		return fmt.Errorf("could not open %s (%v)", partpath, err)
+	}
+	s.lg.Info(
+		"created temporary db file",
+		zap.String("path", partpath),
+	)
+
+	now := time.Now()
+	var rd io.ReadCloser
+	rd, err = cli.Snapshot(ctx)
+	if err != nil {
+		return err
+	}
+	s.lg.Info(
+		"fetching snapshot",
+		zap.String("endpoint", cfg.Endpoints[0]),
+	)
+	if _, err = io.Copy(f, rd); err != nil {
+		return err
+	}
+	if err = fileutil.Fsync(f); err != nil {
+		return err
+	}
+	if err = f.Close(); err != nil {
+		return err
+	}
+	s.lg.Info(
+		"fetched snapshot",
+		zap.String("endpoint", cfg.Endpoints[0]),
+		zap.Duration("took", time.Since(now)),
+	)
+
+	if err = os.Rename(partpath, dbPath); err != nil {
+		return fmt.Errorf("could not rename %s to %s (%v)", partpath, dbPath, err)
+	}
+	s.lg.Info("saved", zap.String("path", dbPath))
+	return nil
 }
 
 // Status is the snapshot file status.
@@ -70,90 +151,7 @@ type Status struct {
 	TotalSize int64  `json:"totalSize"`
 }
 
-// RestoreConfig configures snapshot restore operation.
-type RestoreConfig struct {
-	// Name is the human-readable name of this member.
-	Name string
-	// OutputDataDir is the target data directory to save restored data.
-	// OutputDataDir should not conflict with existing etcd data directory.
-	// If OutputDataDir already exists, it will return an error to prevent
-	// unintended data directory overwrites.
-	// Defaults to "[Name].etcd" if not given.
-	OutputDataDir string
-	// OutputWALDir is the target WAL data directory.
-	// Defaults to "[OutputDataDir]/member/wal" if not given.
-	OutputWALDir string
-	// InitialCluster is the initial cluster configuration for restore bootstrap.
-	InitialCluster types.URLsMap
-	// InitialClusterToken is the initial cluster token for etcd cluster during restore bootstrap.
-	InitialClusterToken string
-	// PeerURLs is a list of member's peer URLs to advertise to the rest of the cluster.
-	PeerURLs types.URLs
-	// SkipHashCheck is "true" to ignore snapshot integrity hash value
-	// (required if copied from data directory).
-	SkipHashCheck bool
-}
-
-// NewV3 returns a new snapshot Manager for v3.x snapshot.
-// "*clientv3.Client" is only used for "Save" method.
-// Otherwise, pass "nil".
-func NewV3(cli *clientv3.Client, lg logutil.Logger) Manager {
-	if lg == nil {
-		lg = logutil.NewDiscardLogger()
-	}
-	return &v3Manager{cli: cli, logger: lg}
-}
-
-type v3Manager struct {
-	cli *clientv3.Client
-
-	name    string
-	dbPath  string
-	walDir  string
-	snapDir string
-	cl      *membership.RaftCluster
-
-	skipHashCheck bool
-	logger        logutil.Logger
-}
-
-func (s *v3Manager) Save(ctx context.Context, dbPath string) error {
-	partpath := dbPath + ".part"
-	f, err := os.Create(partpath)
-	if err != nil {
-		os.RemoveAll(partpath)
-		return fmt.Errorf("could not open %s (%v)", partpath, err)
-	}
-	s.logger.Infof("created temporary db file %q", partpath)
-
-	var rd io.ReadCloser
-	rd, err = s.cli.Snapshot(ctx)
-	if err != nil {
-		os.RemoveAll(partpath)
-		return err
-	}
-	s.logger.Infof("copying from snapshot stream")
-	if _, err = io.Copy(f, rd); err != nil {
-		os.RemoveAll(partpath)
-		return err
-	}
-	if err = fileutil.Fsync(f); err != nil {
-		os.RemoveAll(partpath)
-		return err
-	}
-	if err = f.Close(); err != nil {
-		os.RemoveAll(partpath)
-		return err
-	}
-
-	s.logger.Infof("renaming from %q to %q", partpath, dbPath)
-	if err = os.Rename(partpath, dbPath); err != nil {
-		os.RemoveAll(partpath)
-		return fmt.Errorf("could not rename %s to %s (%v)", partpath, dbPath, err)
-	}
-	return nil
-}
-
+// Status returns the snapshot file information.
 func (s *v3Manager) Status(dbPath string) (ds Status, err error) {
 	if _, err = os.Stat(dbPath); err != nil {
 		return ds, err
@@ -197,19 +195,60 @@ func (s *v3Manager) Status(dbPath string) (ds Status, err error) {
 	return ds, nil
 }
 
-func (s *v3Manager) Restore(dbPath string, cfg RestoreConfig) error {
-	srv := etcdserver.ServerConfig{
-		Name:                cfg.Name,
-		InitialClusterToken: cfg.InitialClusterToken,
-		InitialPeerURLsMap:  cfg.InitialCluster,
-		PeerURLs:            cfg.PeerURLs,
+// RestoreConfig configures snapshot restore operation.
+type RestoreConfig struct {
+	// SnapshotPath is the path of snapshot file to restore from.
+	SnapshotPath string
+
+	// Name is the human-readable name of this member.
+	Name string
+
+	// OutputDataDir is the target data directory to save restored data.
+	// OutputDataDir should not conflict with existing etcd data directory.
+	// If OutputDataDir already exists, it will return an error to prevent
+	// unintended data directory overwrites.
+	// If empty, defaults to "[Name].etcd" if not given.
+	OutputDataDir string
+	// OutputWALDir is the target WAL data directory.
+	// If empty, defaults to "[OutputDataDir]/member/wal" if not given.
+	OutputWALDir string
+
+	// PeerURLs is a list of member's peer URLs to advertise to the rest of the cluster.
+	PeerURLs []string
+
+	// InitialCluster is the initial cluster configuration for restore bootstrap.
+	InitialCluster string
+	// InitialClusterToken is the initial cluster token for etcd cluster during restore bootstrap.
+	InitialClusterToken string
+
+	// SkipHashCheck is "true" to ignore snapshot integrity hash value
+	// (required if copied from data directory).
+	SkipHashCheck bool
+}
+
+// Restore restores a new etcd data directory from given snapshot file.
+func (s *v3Manager) Restore(cfg RestoreConfig) error {
+	pURLs, err := types.NewURLs(cfg.PeerURLs)
+	if err != nil {
+		return err
 	}
-	if err := srv.VerifyBootstrap(); err != nil {
+	var ics types.URLsMap
+	ics, err = types.NewURLsMap(cfg.InitialCluster)
+	if err != nil {
 		return err
 	}
 
-	var err error
-	s.cl, err = membership.NewClusterFromURLsMap(cfg.InitialClusterToken, cfg.InitialCluster)
+	srv := etcdserver.ServerConfig{
+		Name:                cfg.Name,
+		PeerURLs:            pURLs,
+		InitialPeerURLsMap:  ics,
+		InitialClusterToken: cfg.InitialClusterToken,
+	}
+	if err = srv.VerifyBootstrap(); err != nil {
+		return err
+	}
+
+	s.cl, err = membership.NewClusterFromURLsMap(cfg.InitialClusterToken, ics)
 	if err != nil {
 		return err
 	}
@@ -218,33 +257,45 @@ func (s *v3Manager) Restore(dbPath string, cfg RestoreConfig) error {
 	if dataDir == "" {
 		dataDir = cfg.Name + ".etcd"
 	}
-	if _, err = os.Stat(dataDir); err == nil {
+	if fileutil.Exist(dataDir) {
 		return fmt.Errorf("data-dir %q exists", dataDir)
 	}
+
 	walDir := cfg.OutputWALDir
 	if walDir == "" {
 		walDir = filepath.Join(dataDir, "member", "wal")
-	} else if _, err = os.Stat(walDir); err == nil {
+	} else if fileutil.Exist(walDir) {
 		return fmt.Errorf("wal-dir %q exists", walDir)
 	}
-	s.logger.Infof("restoring snapshot file %q to data-dir %q, wal-dir %q", dbPath, dataDir, walDir)
 
 	s.name = cfg.Name
-	s.dbPath = dbPath
+	s.dbPath = cfg.SnapshotPath
 	s.walDir = walDir
 	s.snapDir = filepath.Join(dataDir, "member", "snap")
 	s.skipHashCheck = cfg.SkipHashCheck
 
-	s.logger.Infof("writing snapshot directory %q", s.snapDir)
+	s.lg.Info(
+		"restoring snapshot",
+		zap.String("path", s.dbPath),
+		zap.String("wal-dir", s.walDir),
+		zap.String("data-dir", dataDir),
+		zap.String("snap-dir", s.snapDir),
+	)
 	if err = s.saveDB(); err != nil {
 		return err
 	}
-	s.logger.Infof("writing WAL directory %q and raft snapshot to %q", s.walDir, s.snapDir)
-	err = s.saveWALAndSnap()
-	if err == nil {
-		s.logger.Infof("finished restore %q to data directory %q, wal directory %q", dbPath, dataDir, walDir)
+	if err = s.saveWALAndSnap(); err != nil {
+		return err
 	}
-	return err
+	s.lg.Info(
+		"restored snapshot",
+		zap.String("path", s.dbPath),
+		zap.String("wal-dir", s.walDir),
+		zap.String("data-dir", dataDir),
+		zap.String("snap-dir", s.snapDir),
+	)
+
+	return nil
 }
 
 // saveDB copies the database snapshot to the snapshot directory
@@ -430,9 +481,5 @@ func (s *v3Manager) saveWALAndSnap() error {
 		return err
 	}
 
-	err := w.SaveSnapshot(walpb.Snapshot{Index: commit, Term: term})
-	if err == nil {
-		s.logger.Infof("wrote WAL snapshot to %q", s.walDir)
-	}
-	return err
+	return w.SaveSnapshot(walpb.Snapshot{Index: commit, Term: term})
 }

@@ -20,11 +20,10 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/coreos/etcd/pkg/logutil"
-	"github.com/coreos/etcd/pkg/types"
 	"github.com/coreos/etcd/snapshot"
 
 	"github.com/spf13/cobra"
+	"go.uber.org/zap"
 )
 
 const (
@@ -96,18 +95,19 @@ func snapshotSaveCommandFunc(cmd *cobra.Command, args []string) {
 		ExitWithError(ExitBadArgs, err)
 	}
 
-	lg := logutil.NewDiscardLogger()
 	debug, err := cmd.Flags().GetBool("debug")
 	if err != nil {
 		ExitWithError(ExitError, err)
 	}
+	lg := zap.NewNop()
 	if debug {
-		lg = logutil.NewPackageLogger("github.com/coreos/etcd", "snapshot")
+		lg = zap.NewExample()
 	}
-	sp := snapshot.NewV3(mustClientFromCmd(cmd), lg)
+	sp := snapshot.NewV3(lg)
+	cfg := mustClientCfgFromCmd(cmd)
 
 	path := args[0]
-	if err := sp.Save(context.TODO(), path); err != nil {
+	if err := sp.Save(context.TODO(), *cfg, path); err != nil {
 		ExitWithError(ExitInterrupted, err)
 	}
 	fmt.Printf("Snapshot saved at %s\n", path)
@@ -120,16 +120,15 @@ func snapshotStatusCommandFunc(cmd *cobra.Command, args []string) {
 	}
 	initDisplayFromCmd(cmd)
 
-	lg := logutil.NewDiscardLogger()
 	debug, err := cmd.Flags().GetBool("debug")
 	if err != nil {
 		ExitWithError(ExitError, err)
 	}
+	lg := zap.NewNop()
 	if debug {
-		lg = logutil.NewPackageLogger("github.com/coreos/etcd", "snapshot")
+		lg = zap.NewExample()
 	}
-	sp := snapshot.NewV3(nil, lg)
-
+	sp := snapshot.NewV3(lg)
 	ds, err := sp.Status(args[0])
 	if err != nil {
 		ExitWithError(ExitError, err)
@@ -143,11 +142,6 @@ func snapshotRestoreCommandFunc(cmd *cobra.Command, args []string) {
 		ExitWithError(ExitBadArgs, err)
 	}
 
-	urlmap, uerr := types.NewURLsMap(restoreCluster)
-	if uerr != nil {
-		ExitWithError(ExitBadArgs, uerr)
-	}
-
 	dataDir := restoreDataDir
 	if dataDir == "" {
 		dataDir = restoreName + ".etcd"
@@ -158,23 +152,24 @@ func snapshotRestoreCommandFunc(cmd *cobra.Command, args []string) {
 		walDir = filepath.Join(dataDir, "member", "wal")
 	}
 
-	lg := logutil.NewDiscardLogger()
 	debug, err := cmd.Flags().GetBool("debug")
 	if err != nil {
 		ExitWithError(ExitError, err)
 	}
+	lg := zap.NewNop()
 	if debug {
-		lg = logutil.NewPackageLogger("github.com/coreos/etcd", "snapshot")
+		lg = zap.NewExample()
 	}
-	sp := snapshot.NewV3(nil, lg)
+	sp := snapshot.NewV3(lg)
 
-	if err := sp.Restore(args[0], snapshot.RestoreConfig{
+	if err := sp.Restore(snapshot.RestoreConfig{
+		SnapshotPath:        args[0],
 		Name:                restoreName,
 		OutputDataDir:       dataDir,
 		OutputWALDir:        walDir,
-		InitialCluster:      urlmap,
+		PeerURLs:            strings.Split(restorePeerURLs, ","),
+		InitialCluster:      restoreCluster,
 		InitialClusterToken: restoreClusterToken,
-		PeerURLs:            types.MustNewURLs(strings.Split(restorePeerURLs, ",")),
 		SkipHashCheck:       skipHashCheck,
 	}); err != nil {
 		ExitWithError(ExitError, err)
