@@ -15,9 +15,11 @@
 package etcdmain
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/coreos/etcd/embed"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var (
@@ -55,6 +57,8 @@ Member:
     Time (in milliseconds) of a heartbeat interval.
   --election-timeout '1000'
     Time (in milliseconds) for an election to timeout. See tuning documentation for details.
+  --initial-election-tick-advance 'true'
+    Whether to fast-forward initial election ticks on boot for faster election.
   --listen-peer-urls 'http://localhost:2380'
     List of URLs to listen on for peer traffic.
   --listen-client-urls 'http://localhost:2379'
@@ -132,10 +136,14 @@ Security:
     Enable peer client cert authentication.
   --peer-trusted-ca-file ''
     Path to the peer server TLS trusted CA file.
+  --peer-cert-allowed-cn ''
+    Required CN for client certs connecting to the peer endpoint.
   --peer-auto-tls 'false'
     Peer TLS using self-generated certificates if --peer-key-file and --peer-cert-file are not provided.
   --peer-crl-file ''
     Path to the peer certificate revocation list file.
+  --cipher-suites ''
+    Comma-separated list of supported TLS cipher suites between client/server and peers (empty will be auto-populated by Go).
   --cors '*'
     Comma-separated whitelist of origins for CORS, or cross-origin resource sharing, (empty or * means allow all).
   --host-whitelist '*'
@@ -144,22 +152,28 @@ Security:
 Auth:
   --auth-token 'simple'
     Specify a v3 authentication token type and its options ('simple' or 'jwt').
+  --bcrypt-cost ` + fmt.Sprintf("%d", bcrypt.DefaultCost) + `
+    Specify the cost / strength of the bcrypt algorithm for hashing auth passwords. Valid values are between ` + fmt.Sprintf("%d", bcrypt.MinCost) + ` and ` + fmt.Sprintf("%d", bcrypt.MaxCost) + `.
 
-Profiling:
+Profiling and Monitoring:
   --enable-pprof 'false'
     Enable runtime profiling data via HTTP server. Address is at client URL + "/debug/pprof/"
   --metrics 'basic'
     Set level of detail for exported metrics, specify 'extensive' to include histogram metrics.
   --listen-metrics-urls ''
-    List of URLs to listen on for metrics.
+    List of URLs to listen on for the metrics and health endpoints.
 
 Logging:
+  --logger 'capnslog'
+    Specify 'zap' for structured logging or 'capnslog'.
+  --log-outputs 'default'
+    Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd, or list of comma separated output targets.
   --debug 'false'
     Enable debug-level logging for etcd.
+
+Logging (to be deprecated in v3.5):
   --log-package-levels ''
     Specify a particular log level for each etcd package (eg: 'etcdmain=CRITICAL,etcdserver=DEBUG').
-  --log-output 'default'
-    Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd.
 
 v2 Proxy (to be deprecated in v4):
   --proxy 'off'

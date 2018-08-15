@@ -5,7 +5,7 @@
   ],
   "blocksize": "48M",
   "expanded": {
-    "node_modules/puppeteer/.local-chromium/linux-549031/chrome-linux/chrome": {
+    "node_modules/puppeteer/.local-chromium/linux-579032/chrome-linux/chrome": {
       "suffix": ".fr",
       "mode": 493
     }

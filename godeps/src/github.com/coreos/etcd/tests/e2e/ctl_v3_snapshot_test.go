@@ -25,9 +25,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/coreos/etcd/clientv3/snapshot"
 	"github.com/coreos/etcd/pkg/expect"
 	"github.com/coreos/etcd/pkg/testutil"
-	"github.com/coreos/etcd/snapshot"
 )
 
 func TestCtlV3Snapshot(t *testing.T) { testCtl(t, snapshotTest) }
@@ -43,7 +43,7 @@ func snapshotTest(cx ctlCtx) {
 		cx.t.Fatalf("snapshot: ctlV3Put error (%v)", err)
 	}
 
-	fpath := "test.snapshot"
+	fpath := "test1.snapshot"
 	defer os.RemoveAll(fpath)
 
 	if err = ctlV3SnapshotSave(cx, fpath); err != nil {
@@ -65,7 +65,7 @@ func snapshotTest(cx ctlCtx) {
 func TestCtlV3SnapshotCorrupt(t *testing.T) { testCtl(t, snapshotCorruptTest) }
 
 func snapshotCorruptTest(cx ctlCtx) {
-	fpath := "test.snapshot"
+	fpath := "test2.snapshot"
 	defer os.RemoveAll(fpath)
 
 	if err := ctlV3SnapshotSave(cx, fpath); err != nil {
@@ -98,7 +98,7 @@ func snapshotCorruptTest(cx ctlCtx) {
 func TestCtlV3SnapshotStatusBeforeRestore(t *testing.T) { testCtl(t, snapshotStatusBeforeRestoreTest) }
 
 func snapshotStatusBeforeRestoreTest(cx ctlCtx) {
-	fpath := "test.snapshot"
+	fpath := "test3.snapshot"
 	defer os.RemoveAll(fpath)
 
 	if err := ctlV3SnapshotSave(cx, fpath); err != nil {
@@ -117,7 +117,6 @@ func snapshotStatusBeforeRestoreTest(cx ctlCtx) {
 			"--data-dir", "snap.etcd",
 			fpath),
 		"added member")
-
 	if serr != nil {
 		cx.t.Fatal(serr)
 	}
@@ -201,7 +200,7 @@ func TestIssue6361(t *testing.T) {
 	defer os.RemoveAll(newDataDir)
 
 	// etcdctl restore the snapshot
-	err = spawnWithExpect([]string{ctlBinPath, "snapshot", "restore", fpath, "--name", epc.procs[0].Config().name, "--initial-cluster", epc.procs[0].Config().initialCluster, "--initial-cluster-token", epc.procs[0].Config().initialToken, "--initial-advertise-peer-urls", epc.procs[0].Config().purl.String(), "--data-dir", newDataDir}, "membership: added member")
+	err = spawnWithExpect([]string{ctlBinPath, "snapshot", "restore", fpath, "--name", epc.procs[0].Config().name, "--initial-cluster", epc.procs[0].Config().initialCluster, "--initial-cluster-token", epc.procs[0].Config().initialToken, "--initial-advertise-peer-urls", epc.procs[0].Config().purl.String(), "--data-dir", newDataDir}, "added member")
 	if err != nil {
 		t.Fatal(err)
 	}

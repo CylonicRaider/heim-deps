@@ -1,9 +1,15 @@
+
+
+**WARNING**: etcd will be transferred from https://github.com/coreos to https://github.com/etcd-io, on 5PM PST, Mon, August 27, 2018. See https://github.com/coreos/etcd/issues/9965 for detailed timeline.
+
+
 # etcd
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/coreos/etcd?style=flat-square)](https://goreportcard.com/report/github.com/coreos/etcd)
 [![Coverage](https://codecov.io/gh/coreos/etcd/branch/master/graph/badge.svg)](https://codecov.io/gh/coreos/etcd)
 [![Build Status Travis](https://img.shields.io/travis/coreos/etcdlabs.svg?style=flat-square&&branch=master)](https://travis-ci.org/coreos/etcd)
 [![Build Status Semaphore](https://semaphoreci.com/api/v1/coreos/etcd/branches/master/shields_badge.svg)](https://semaphoreci.com/coreos/etcd)
+[![Docs](https://readthedocs.org/projects/etcd/badge/?version=latest&style=flat-square)](https://etcd.readthedocs.io/en/latest/?badge=latest)
 [![Godoc](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://godoc.org/github.com/coreos/etcd)
 [![Releases](https://img.shields.io/github/release/coreos/etcd/all.svg?style=flat-square)](https://github.com/coreos/etcd/releases)
 [![LICENSE](https://img.shields.io/github/license/coreos/etcd.svg?style=flat-square)](https://github.com/coreos/etcd/blob/master/LICENSE)
@@ -12,7 +18,7 @@
 
 *the etcd v2 [documentation](Documentation/v2/README.md) has moved*
 
-![etcd Logo](logos/etcd-horizontal-color.png)
+![etcd Logo](logos/etcd-horizontal-color.svg)
 
 etcd is a distributed reliable key-value store for the most critical data of a distributed system, with a focus on being:
 
@@ -39,7 +45,7 @@ See [etcdctl][etcdctl] for a simple command line client.
 etcd contributors and maintainers have bi-weekly meetings at 11:00 AM (USA Pacific) on Tuesdays. Anyone is welcome to join via [BlueJeans][bluejeans]. An initial agenda will be posted to the [shared Google docs][shared-meeting-notes] a day before each meeting, and everyone is welcome to suggest additional topics or other agendas.
 
 [bluejeans]: https://bluejeans.com/2732309610
-[shared-meeting-notes]: https://docs.google.com/document/d/1DbVXOHvd9scFsSmL2oNg4YGOHJdXqtx583DmeVWrB_M/edit#
+[shared-meeting-notes]: https://docs.google.com/document/d/16XEGyPBisZvmmoIHSZzv__LoyOeluC5a4x353CX0SIM/edit
 
 ## Getting started
 
@@ -64,6 +70,7 @@ If etcd is installed using the [pre-built release binaries][github-release], run
 ```sh
 /tmp/etcd-download-test/etcd
 ```
+
 The etcd command can be simply run as such if it is moved to the system path as below:
 
 ```sh
@@ -71,7 +78,7 @@ mv /tmp/etcd-download-test/etcd /usr/local/bin/
 etcd
 ```
 
-If etcd is [build from the master branch][dl-build], run it as below:
+If etcd is [built from the master branch][dl-build], run it as below:
 
 ```sh
 ./bin/etcd
@@ -149,6 +156,12 @@ See [CONTRIBUTING](CONTRIBUTING.md) for details on submitting patches and the co
 ## Reporting bugs
 
 See [reporting bugs](Documentation/reporting_bugs.md) for details about reporting any issues.
+
+## Reporting a security vulnerability
+
+Due to their public nature, GitHub and mailing lists are NOT appropriate places for reporting vulnerabilities. Please refer to CoreOS's [security disclosure][disclosure] process when reporting issues that may be security related.
+
+[disclosure]: https://coreos.com/security/disclosure/
 
 ### License
 

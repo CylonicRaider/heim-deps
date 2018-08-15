@@ -33,10 +33,16 @@ func TestConfigFileOtherFields(t *testing.T) {
 		ClientSecurityCfgFile securityConfig `json:"client-transport-security"`
 		PeerSecurityCfgFile   securityConfig `json:"peer-transport-security"`
 		ForceNewCluster       bool           `json:"force-new-cluster"`
+		Logger                string         `json:"logger"`
+		LogOutputs            []string       `json:"log-outputs"`
+		Debug                 bool           `json:"debug"`
 	}{
 		ctls,
 		ptls,
 		true,
+		"zap",
+		[]string{"/dev/null"},
+		false,
 	}
 
 	b, err := yaml.Marshal(&yc)
@@ -150,6 +156,9 @@ func mustCreateCfgFile(t *testing.T, b []byte) *os.File {
 
 func TestAutoCompactionModeInvalid(t *testing.T) {
 	cfg := NewConfig()
+	cfg.Logger = "zap"
+	cfg.LogOutputs = []string{"/dev/null"}
+	cfg.Debug = false
 	cfg.AutoCompactionMode = "period"
 	err := cfg.Validate()
 	if err == nil {

@@ -20,9 +20,11 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/url"
 	"os"
 	"runtime"
+	"sort"
 	"strings"
 
 	"github.com/coreos/etcd/embed"
@@ -31,6 +33,7 @@ import (
 	"github.com/coreos/etcd/version"
 
 	"github.com/ghodss/yaml"
+	"go.uber.org/zap"
 )
 
 var (
@@ -142,14 +145,15 @@ func newConfig() *config {
 	fs.Var(
 		flags.NewUniqueURLsWithExceptions("", ""),
 		"listen-metrics-urls",
-		"List of URLs to listen on for metrics.",
+		"List of URLs to listen on for the metrics and health endpoints.",
 	)
 	fs.UintVar(&cfg.ec.MaxSnapFiles, "max-snapshots", cfg.ec.MaxSnapFiles, "Maximum number of snapshot files to retain (0 is unlimited).")
 	fs.UintVar(&cfg.ec.MaxWalFiles, "max-wals", cfg.ec.MaxWalFiles, "Maximum number of wal files to retain (0 is unlimited).")
 	fs.StringVar(&cfg.ec.Name, "name", cfg.ec.Name, "Human-readable name for this member.")
-	fs.Uint64Var(&cfg.ec.SnapCount, "snapshot-count", cfg.ec.SnapCount, "Number of committed transactions to trigger a snapshot to disk.")
+	fs.Uint64Var(&cfg.ec.SnapshotCount, "snapshot-count", cfg.ec.SnapshotCount, "Number of committed transactions to trigger a snapshot to disk.")
 	fs.UintVar(&cfg.ec.TickMs, "heartbeat-interval", cfg.ec.TickMs, "Time (in milliseconds) of a heartbeat interval.")
 	fs.UintVar(&cfg.ec.ElectionMs, "election-timeout", cfg.ec.ElectionMs, "Time (in milliseconds) for an election to timeout.")
+	fs.BoolVar(&cfg.ec.InitialElectionTickAdvance, "initial-election-tick-advance", cfg.ec.InitialElectionTickAdvance, "Whether to fast-forward initial election ticks on boot for faster election.")
 	fs.Int64Var(&cfg.ec.QuotaBackendBytes, "quota-backend-bytes", cfg.ec.QuotaBackendBytes, "Raise alarms when backend size exceeds the given quota. 0 means use the default quota.")
 	fs.UintVar(&cfg.ec.MaxTxnOps, "max-txn-ops", cfg.ec.MaxTxnOps, "Maximum number of operations permitted in a transaction.")
 	fs.UintVar(&cfg.ec.MaxRequestBytes, "max-request-bytes", cfg.ec.MaxRequestBytes, "Maximum client request size in bytes the server will accept.")
@@ -204,6 +208,7 @@ func newConfig() *config {
 	fs.BoolVar(&cfg.ec.PeerAutoTLS, "peer-auto-tls", false, "Peer TLS using generated certificates")
 	fs.StringVar(&cfg.ec.PeerTLSInfo.CRLFile, "peer-crl-file", "", "Path to the peer certificate revocation list file.")
 	fs.StringVar(&cfg.ec.PeerTLSInfo.AllowedCN, "peer-cert-allowed-cn", "", "Allowed CN for inter peer authentication.")
+	fs.Var(flags.NewStringsValue(""), "cipher-suites", "Comma-separated list of supported TLS cipher suites between client/server and peers (empty will be auto-populated by Go).")
 
 	fs.Var(
 		flags.NewUniqueURLsWithExceptions("*", "*"),
@@ -213,9 +218,11 @@ func newConfig() *config {
 	fs.Var(flags.NewUniqueStringsValue("*"), "host-whitelist", "Comma-separated acceptable hostnames from HTTP client requests, if server is not secure (empty means allow all).")
 
 	// logging
+	fs.StringVar(&cfg.ec.Logger, "logger", "capnslog", "Specify 'zap' for structured logging or 'capnslog'.")
+	fs.Var(flags.NewUniqueStringsValue(embed.DefaultLogOutput), "log-output", "DEPRECATED: use '--log-outputs'.")
+	fs.Var(flags.NewUniqueStringsValue(embed.DefaultLogOutput), "log-outputs", "Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd, or list of comma separated output targets.")
 	fs.BoolVar(&cfg.ec.Debug, "debug", false, "Enable debug-level logging for etcd.")
-	fs.StringVar(&cfg.ec.LogPkgLevels, "log-package-levels", "", "Specify a particular log level for each etcd package (eg: 'etcdmain=CRITICAL,etcdserver=DEBUG').")
-	fs.StringVar(&cfg.ec.LogOutput, "log-output", embed.DefaultLogOutput, "Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd.")
+	fs.StringVar(&cfg.ec.LogPkgLevels, "log-package-levels", "", "(To be deprecated) Specify a particular log level for each etcd package (eg: 'etcdmain=CRITICAL,etcdserver=DEBUG').")
 
 	// version
 	fs.BoolVar(&cfg.printVersion, "version", false, "Print the version and exit.")
@@ -231,6 +238,7 @@ func newConfig() *config {
 
 	// auth
 	fs.StringVar(&cfg.ec.AuthToken, "auth-token", cfg.ec.AuthToken, "Specify auth token specific options.")
+	fs.UintVar(&cfg.ec.BcryptCost, "bcrypt-cost", cfg.ec.BcryptCost, "Specify bcrypt algorithm cost factor for auth password hashing.")
 
 	// experimental
 	fs.BoolVar(&cfg.ec.ExperimentalInitialCorruptCheck, "experimental-initial-corrupt-check", cfg.ec.ExperimentalInitialCorruptCheck, "Enable to check data corruption before serving any client/peer traffic.")
@@ -271,18 +279,26 @@ func (cfg *config) parse(arguments []string) error {
 
 	var err error
 	if cfg.configFile != "" {
-		plog.Infof("Loading server configuration from %q. Other configuration command line flags and environment variables will be ignored if provided.", cfg.configFile)
 		err = cfg.configFromFile(cfg.configFile)
+		if lg := cfg.ec.GetLogger(); lg != nil {
+			lg.Info(
+				"loaded server configuraionl, other configuration command line flags and environment variables will be ignored if provided",
+				zap.String("path", cfg.configFile),
+			)
+		} else {
+			plog.Infof("Loading server configuration from %q. Other configuration command line flags and environment variables will be ignored if provided.", cfg.configFile)
+		}
 	} else {
 		err = cfg.configFromCmdLine()
 	}
+	// now logger is set up
 	return err
 }
 
 func (cfg *config) configFromCmdLine() error {
 	err := flags.SetFlagsFromEnv("ETCD", cfg.cf.flagSet)
 	if err != nil {
-		plog.Fatalf("%v", err)
+		return err
 	}
 
 	cfg.ec.LPUrls = flags.UniqueURLsFromFlag(cfg.cf.flagSet, "listen-peer-urls")
@@ -293,6 +309,25 @@ func (cfg *config) configFromCmdLine() error {
 
 	cfg.ec.CORS = flags.UniqueURLsMapFromFlag(cfg.cf.flagSet, "cors")
 	cfg.ec.HostWhitelist = flags.UniqueStringsMapFromFlag(cfg.cf.flagSet, "host-whitelist")
+
+	cfg.ec.CipherSuites = flags.StringsFromFlag(cfg.cf.flagSet, "cipher-suites")
+
+	// TODO: remove this in v3.5
+	output := flags.UniqueStringsMapFromFlag(cfg.cf.flagSet, "log-output")
+	oss1 := make([]string, 0, len(output))
+	for v := range output {
+		oss1 = append(oss1, v)
+	}
+	sort.Strings(oss1)
+	cfg.ec.DeprecatedLogOutput = oss1
+
+	outputs := flags.UniqueStringsMapFromFlag(cfg.cf.flagSet, "log-outputs")
+	oss2 := make([]string, 0, len(outputs))
+	for v := range outputs {
+		oss2 = append(oss2, v)
+	}
+	sort.Strings(oss2)
+	cfg.ec.LogOutputs = oss2
 
 	cfg.ec.ClusterState = cfg.cf.clusterState.String()
 	cfg.cp.Fallback = cfg.cf.fallback.String()
@@ -331,21 +366,21 @@ func (cfg *config) configFromFile(path string) error {
 	if cfg.ec.ListenMetricsUrlsJSON != "" {
 		us, err := types.NewURLs(strings.Split(cfg.ec.ListenMetricsUrlsJSON, ","))
 		if err != nil {
-			plog.Panicf("unexpected error setting up listen-metrics-urls: %v", err)
+			log.Fatalf("unexpected error setting up listen-metrics-urls: %v", err)
 		}
 		cfg.ec.ListenMetricsUrls = []url.URL(us)
 	}
 
 	if cfg.cp.FallbackJSON != "" {
 		if err := cfg.cf.fallback.Set(cfg.cp.FallbackJSON); err != nil {
-			plog.Panicf("unexpected error setting up discovery-fallback flag: %v", err)
+			log.Fatalf("unexpected error setting up discovery-fallback flag: %v", err)
 		}
 		cfg.cp.Fallback = cfg.cf.fallback.String()
 	}
 
 	if cfg.cp.ProxyJSON != "" {
 		if err := cfg.cf.proxy.Set(cfg.cp.ProxyJSON); err != nil {
-			plog.Panicf("unexpected error setting up proxyFlag: %v", err)
+			log.Fatalf("unexpected error setting up proxyFlag: %v", err)
 		}
 		cfg.cp.Proxy = cfg.cf.proxy.String()
 	}

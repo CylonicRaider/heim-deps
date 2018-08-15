@@ -53,7 +53,8 @@ type GlobalFlags struct {
 	OutputFormat string
 	IsHex        bool
 
-	User string
+	User     string
+	Password string
 
 	Debug bool
 }
@@ -111,11 +112,12 @@ func (*discardValue) Type() string     { return "" }
 
 func clientConfigFromCmd(cmd *cobra.Command) *clientConfig {
 	fs := cmd.InheritedFlags()
-
-	// silence "pkg/flags: unrecognized environment variable ETCDCTL_WATCH_KEY=foo" warnings
-	// silence "pkg/flags: unrecognized environment variable ETCDCTL_WATCH_RANGE_END=bar" warnings
-	fs.AddFlag(&pflag.Flag{Name: "watch-key", Value: &discardValue{}})
-	fs.AddFlag(&pflag.Flag{Name: "watch-range-end", Value: &discardValue{}})
+	if strings.HasPrefix(cmd.Use, "watch") {
+		// silence "pkg/flags: unrecognized environment variable ETCDCTL_WATCH_KEY=foo" warnings
+		// silence "pkg/flags: unrecognized environment variable ETCDCTL_WATCH_RANGE_END=bar" warnings
+		fs.AddFlag(&pflag.Flag{Name: "watch-key", Value: &discardValue{}})
+		fs.AddFlag(&pflag.Flag{Name: "watch-range-end", Value: &discardValue{}})
+	}
 	flags.SetPflagsFromEnv("ETCDCTL", fs)
 
 	debug, err := cmd.Flags().GetBool("debug")
@@ -128,7 +130,11 @@ func clientConfigFromCmd(cmd *cobra.Command) *clientConfig {
 			fmt.Fprintf(os.Stderr, "%s=%v\n", flags.FlagToEnv("ETCDCTL", f.Name), f.Value)
 		})
 	} else {
-		clientv3.SetLogger(grpclog.NewLoggerV2(ioutil.Discard, ioutil.Discard, ioutil.Discard))
+		// WARNING logs contain important information like TLS misconfirugation, but spams
+		// too many routine connection disconnects to turn on by default.
+		//
+		// See https://github.com/coreos/etcd/pull/9623 for background
+		clientv3.SetLogger(grpclog.NewLoggerV2(ioutil.Discard, ioutil.Discard, os.Stderr))
 	}
 
 	cfg := &clientConfig{}
@@ -337,6 +343,10 @@ func authCfgFromCmd(cmd *cobra.Command) *authCfg {
 	if err != nil {
 		ExitWithError(ExitBadArgs, err)
 	}
+	passwordFlag, err := cmd.Flags().GetString("password")
+	if err != nil {
+		ExitWithError(ExitBadArgs, err)
+	}
 
 	if userFlag == "" {
 		return nil
@@ -344,16 +354,21 @@ func authCfgFromCmd(cmd *cobra.Command) *authCfg {
 
 	var cfg authCfg
 
-	splitted := strings.SplitN(userFlag, ":", 2)
-	if len(splitted) < 2 {
-		cfg.username = userFlag
-		cfg.password, err = speakeasy.Ask("Password: ")
-		if err != nil {
-			ExitWithError(ExitError, err)
+	if passwordFlag == "" {
+		splitted := strings.SplitN(userFlag, ":", 2)
+		if len(splitted) < 2 {
+			cfg.username = userFlag
+			cfg.password, err = speakeasy.Ask("Password: ")
+			if err != nil {
+				ExitWithError(ExitError, err)
+			}
+		} else {
+			cfg.username = splitted[0]
+			cfg.password = splitted[1]
 		}
 	} else {
-		cfg.username = splitted[0]
-		cfg.password = splitted[1]
+		cfg.username = userFlag
+		cfg.password = passwordFlag
 	}
 
 	return &cfg
@@ -390,6 +405,11 @@ func endpointsFromCmd(cmd *cobra.Command) ([]string, error) {
 	// If domain discovery returns no endpoints, check endpoints flag
 	if len(eps) == 0 {
 		eps, err = cmd.Flags().GetStringSlice("endpoints")
+		if err == nil {
+			for i, ip := range eps {
+				eps[i] = strings.TrimSpace(ip)
+			}
+		}
 	}
 	return eps, err
 }

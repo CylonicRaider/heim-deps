@@ -27,22 +27,23 @@ import (
 	"github.com/coreos/etcd/client"
 	"github.com/coreos/etcd/etcdserver"
 	"github.com/coreos/etcd/etcdserver/api"
+	"github.com/coreos/etcd/etcdserver/api/membership"
+	"github.com/coreos/etcd/etcdserver/api/snap"
+	"github.com/coreos/etcd/etcdserver/api/v2error"
+	"github.com/coreos/etcd/etcdserver/api/v2store"
 	pb "github.com/coreos/etcd/etcdserver/etcdserverpb"
-	"github.com/coreos/etcd/etcdserver/membership"
-	"github.com/coreos/etcd/etcdserver/v2error"
-	"github.com/coreos/etcd/etcdserver/v2store"
 	"github.com/coreos/etcd/mvcc"
 	"github.com/coreos/etcd/mvcc/backend"
 	"github.com/coreos/etcd/mvcc/mvccpb"
 	"github.com/coreos/etcd/pkg/pbutil"
 	"github.com/coreos/etcd/pkg/types"
 	"github.com/coreos/etcd/raft/raftpb"
-	"github.com/coreos/etcd/raftsnap"
 	"github.com/coreos/etcd/wal"
 	"github.com/coreos/etcd/wal/walpb"
 
 	"github.com/gogo/protobuf/proto"
 	"github.com/spf13/cobra"
+	"go.uber.org/zap"
 )
 
 var (
@@ -127,7 +128,7 @@ func prepareBackend() backend.Backend {
 
 func rebuildStoreV2() (v2store.Store, uint64) {
 	var index uint64
-	cl := membership.NewCluster("")
+	cl := membership.NewCluster(zap.NewExample(), "")
 
 	waldir := migrateWALdir
 	if len(waldir) == 0 {
@@ -135,9 +136,9 @@ func rebuildStoreV2() (v2store.Store, uint64) {
 	}
 	snapdir := filepath.Join(migrateDatadir, "member", "snap")
 
-	ss := raftsnap.New(snapdir)
+	ss := snap.New(zap.NewExample(), snapdir)
 	snapshot, err := ss.Load()
-	if err != nil && err != raftsnap.ErrNoSnapshot {
+	if err != nil && err != snap.ErrNoSnapshot {
 		ExitWithError(ExitError, err)
 	}
 
@@ -147,7 +148,7 @@ func rebuildStoreV2() (v2store.Store, uint64) {
 		index = snapshot.Metadata.Index
 	}
 
-	w, err := wal.OpenForRead(waldir, walsnap)
+	w, err := wal.OpenForRead(zap.NewExample(), waldir, walsnap)
 	if err != nil {
 		ExitWithError(ExitError, err)
 	}
@@ -169,7 +170,7 @@ func rebuildStoreV2() (v2store.Store, uint64) {
 	cl.SetStore(st)
 	cl.Recover(api.UpdateCapability)
 
-	applier := etcdserver.NewApplierV2(st, cl)
+	applier := etcdserver.NewApplierV2(zap.NewExample(), st, cl)
 	for _, ent := range ents {
 		if ent.Type == raftpb.EntryConfChange {
 			var cc raftpb.ConfChange

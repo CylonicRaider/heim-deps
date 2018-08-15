@@ -135,6 +135,15 @@
 		]
 	},
 	{
+		"project": "github.com/grpc-ecosystem/go-grpc-middleware",
+		"licenses": [
+			{
+				"type": "Apache License 2.0",
+				"confidence": 1
+			}
+		]
+	},
+	{
 		"project": "github.com/grpc-ecosystem/go-grpc-prometheus",
 		"licenses": [
 			{
@@ -408,8 +417,8 @@
 		"project": "gopkg.in/yaml.v2",
 		"licenses": [
 			{
-				"type": "The Unlicense",
-				"confidence": 0.35294117647058826
+				"type": "Apache License 2.0",
+				"confidence": 1
 			},
 			{
 				"type": "MIT License",

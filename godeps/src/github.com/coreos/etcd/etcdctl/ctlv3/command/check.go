@@ -96,7 +96,7 @@ var checkDatascaleCfgMap = map[string]checkDatascaleCfg{
 	},
 	"xl": {
 		// xl tries to hit the upper bound aggressively which is 3 versions of 1M objects (3M in total)
-		limit:   30000000,
+		limit:   3000000,
 		kvSize:  1024,
 		clients: 1000,
 	},
@@ -192,7 +192,7 @@ func newCheckPerfCommand(cmd *cobra.Command, args []string) {
 		cctx, ccancel := context.WithTimeout(context.Background(), time.Duration(cfg.duration)*time.Second)
 		defer ccancel()
 		for limit.Wait(cctx) == nil {
-			binary.PutVarint(k, int64(rand.Int63n(math.MaxInt64)))
+			binary.PutVarint(k, rand.Int63n(math.MaxInt64))
 			requests <- v3.OpPut(checkPerfPrefix+string(k), v)
 		}
 		close(requests)
@@ -336,6 +336,10 @@ func newCheckDatascaleCommand(cmd *cobra.Command, args []string) {
 	}
 
 	fmt.Println(fmt.Sprintf("Start data scale check for work load [%v key-value pairs, %v bytes per key-value, %v concurrent clients].", cfg.limit, cfg.kvSize, cfg.clients))
+	bar := pb.New(cfg.limit)
+	bar.Format("Bom !")
+	bar.Start()
+
 	for i := range clients {
 		go func(c *v3.Client) {
 			defer wg.Done()
@@ -343,13 +347,14 @@ func newCheckDatascaleCommand(cmd *cobra.Command, args []string) {
 				st := time.Now()
 				_, derr := c.Do(context.Background(), op)
 				r.Results() <- report.Result{Err: derr, Start: st, End: time.Now()}
+				bar.Increment()
 			}
 		}(clients[i])
 	}
 
 	go func() {
 		for i := 0; i < cfg.limit; i++ {
-			binary.PutVarint(k, int64(rand.Int63n(math.MaxInt64)))
+			binary.PutVarint(k, rand.Int63n(math.MaxInt64))
 			requests <- v3.OpPut(checkDatascalePrefix+string(k), v)
 		}
 		close(requests)
@@ -358,6 +363,7 @@ func newCheckDatascaleCommand(cmd *cobra.Command, args []string) {
 	sc := r.Stats()
 	wg.Wait()
 	close(r.Results())
+	bar.Finish()
 	s := <-sc
 
 	// get the process_resident_memory_bytes after the put operations
@@ -400,6 +406,6 @@ func newCheckDatascaleCommand(cmd *cobra.Command, args []string) {
 		}
 		os.Exit(ExitError)
 	} else {
-		fmt.Println(fmt.Sprintf("PASS: Approximate system memory used : %v MB.", strconv.FormatFloat(float64(mbUsed), 'f', 2, 64)))
+		fmt.Println(fmt.Sprintf("PASS: Approximate system memory used : %v MB.", strconv.FormatFloat(mbUsed, 'f', 2, 64)))
 	}
 }

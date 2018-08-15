@@ -28,8 +28,6 @@ import (
 	"github.com/coreos/etcd/client"
 	"github.com/coreos/etcd/etcdserver"
 	"github.com/coreos/etcd/pkg/testutil"
-
-	"github.com/coreos/pkg/capnslog"
 )
 
 func init() {
@@ -253,7 +251,7 @@ func testIssue2746(t *testing.T, members int) {
 	c := NewCluster(t, members)
 
 	for _, m := range c.Members {
-		m.SnapCount = 10
+		m.SnapshotCount = 10
 	}
 
 	c.Launch(t)
@@ -455,9 +453,6 @@ func TestRejectUnhealthyRemove(t *testing.T) {
 // (see https://github.com/coreos/etcd/issues/7512 for more).
 func TestRestartRemoved(t *testing.T) {
 	defer testutil.AfterTest(t)
-
-	capnslog.SetGlobalLogLevel(capnslog.INFO)
-	defer capnslog.SetGlobalLogLevel(defaultLogLevel)
 
 	// 1. start single-member cluster
 	c := NewCluster(t, 1)

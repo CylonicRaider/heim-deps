@@ -81,6 +81,19 @@ Insert '--' for workaround:
 ./etcdctl put -- <key> <value>
 ```
 
+Providing \<value\> in a new line after using `carriage return` is not supported and etcdctl may hang in that case. For example, following case is not supported:
+
+```bash
+./etcdctl put <key>\r
+<value>
+```
+
+A \<value\> can have multiple lines or spaces but it must be provided with a double-quote as demonstrated below:
+
+```bash
+./etcdctl put foo "bar1 2 3"
+```
+
 ### GET [options] \<key\> [range_end]
 
 GET gets the key or a range of keys [key, range_end) if range_end is given.
@@ -256,7 +269,7 @@ RPC: Txn
 <Txn> ::= <CMP>* "\n" <THEN> "\n" <ELSE> "\n"
 <CMP> ::= (<CMPCREATE>|<CMPMOD>|<CMPVAL>|<CMPVER>|<CMPLEASE>) "\n"
 <CMPOP> ::= "<" | "=" | ">"
-<CMPCREATE> := ("c"|"create")"("<KEY>")" <REVISION>
+<CMPCREATE> := ("c"|"create")"("<KEY>")" <CMPOP> <REVISION>
 <CMPMOD> ::= ("m"|"mod")"("<KEY>")" <CMPOP> <REVISION>
 <CMPVAL> ::= ("val"|"value")"("<KEY>")" <CMPOP> <VALUE>
 <CMPVER> ::= ("ver"|"version")"("<KEY>")" <CMPOP> <VERSION>

@@ -109,7 +109,7 @@ To start etcd automatically using custom settings at startup in Linux, using a [
 
 ## Clustering flags
 
-`--initial` prefix flags are used in bootstrapping ([static bootstrap][build-cluster], [discovery-service bootstrap][discovery] or [runtime reconfiguration][reconfig]) a new member, and ignored when restarting an existing member.
+`--initial-advertise-peer-urls`, `--initial-cluster`, `--initial-cluster-state`, and `--initial-cluster-token` flags are used in bootstrapping ([static bootstrap][build-cluster], [discovery-service bootstrap][discovery] or [runtime reconfiguration][reconfig]) a new member, and ignored when restarting an existing member.
 
 `--discovery` prefix flags need to be set when using [discovery service][discovery].
 
@@ -312,6 +312,16 @@ The security flags help to [build a secure etcd cluster][security].
 
 ## Logging flags
 
+### --logger
++ Specify 'zap' for structured logging or 'capnslog'.
++ default: capnslog
++ env variable: ETCD_LOGGER
+
+### --log-outputs
++ Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd, or list of comma separated output targets.
++ default: default
++ env variable: ETCD_LOG_OUTPUT
+
 ### --debug
 + Drop the default log level to DEBUG for all subpackages.
 + default: false (INFO for all packages)
@@ -355,15 +365,20 @@ Follow the instructions when using these flags.
 + default: basic
 
 ### --listen-metrics-urls
-+ List of URLs to listen on for metrics.
++ List of additional URLs to listen on that will respond to both the `/metrics` and `/health` endpoints
 + default: ""
 
 ## Auth flags
 
 ### --auth-token
 + Specify a token type and token specific options, especially for JWT. Its format is "type,var1=val1,var2=val2,...". Possible type is 'simple' or 'jwt'. Possible variables are 'sign-method' for specifying a sign method of jwt (its possible values are 'ES256', 'ES384', 'ES512', 'HS256', 'HS384', 'HS512', 'RS256', 'RS384', 'RS512', 'PS256', 'PS384', or 'PS512'), 'pub-key' for specifying a path to a public key for verifying jwt, 'priv-key' for specifying a path to a private key for signing jwt, and 'ttl' for specifying TTL of jwt tokens.
++ For asymmetric algorithms ('RS', 'PS', 'ES'), the public key is optional, as the private key contains enough information to both sign and verify tokens.
 + Example option of JWT: '--auth-token jwt,pub-key=app.rsa.pub,priv-key=app.rsa,sign-method=RS512,ttl=10m'
 + default: "simple"
+
+### --bcrypt-cost
++ Specify the cost / strength of the bcrypt algorithm for hashing auth passwords. Valid values are between 4 and 31.
++ default: 10
 
 ## Experimental flags
 

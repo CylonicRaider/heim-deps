@@ -2195,7 +2195,7 @@
           "format": "uint64"
         },
         "revision": {
-          "description": "revision is the key-value store revision when the request was applied.",
+          "description": "revision is the key-value store revision when the request was applied.\nFor watch progress responses, the header.revision indicates progress. All future events\nrecieved in this stream are guaranteed to have a higher revision number than the\nheader.revision number.",
           "type": "string",
           "format": "int64"
         }
@@ -2359,6 +2359,11 @@
             "$ref": "#/definitions/WatchCreateRequestFilterType"
           }
         },
+        "fragment": {
+          "description": "fragment enables splitting large revisions into multiple watch responses.",
+          "type": "boolean",
+          "format": "boolean"
+        },
         "key": {
           "description": "key is the key to register for watching.",
           "type": "string",
@@ -2391,6 +2396,10 @@
         }
       }
     },
+    "etcdserverpbWatchProgressRequest": {
+      "description": "Requests the a watch stream progress status be sent in the watch response stream as soon as\npossible.",
+      "type": "object"
+    },
     "etcdserverpbWatchRequest": {
       "type": "object",
       "properties": {
@@ -2399,6 +2408,9 @@
         },
         "create_request": {
           "$ref": "#/definitions/etcdserverpbWatchCreateRequest"
+        },
+        "progress_request": {
+          "$ref": "#/definitions/etcdserverpbWatchProgressRequest"
         }
       }
     },
@@ -2429,6 +2441,11 @@
           "items": {
             "$ref": "#/definitions/mvccpbEvent"
           }
+        },
+        "fragment": {
+          "description": "framgment is true if large watch response was split over multiple responses.",
+          "type": "boolean",
+          "format": "boolean"
         },
         "header": {
           "$ref": "#/definitions/etcdserverpbResponseHeader"

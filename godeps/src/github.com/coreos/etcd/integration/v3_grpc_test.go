@@ -32,7 +32,9 @@ import (
 	"github.com/coreos/etcd/pkg/transport"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 )
 
 // TestV3PutOverwrite puts a key with the v3 api to a random cluster member,
@@ -1570,6 +1572,7 @@ func TestTLSGRPCRejectSecureClient(t *testing.T) {
 	defer clus.Terminate(t)
 
 	clus.Members[0].ClientTLSInfo = &testTLSInfo
+	clus.Members[0].DialOptions = []grpc.DialOption{grpc.WithBlock()}
 	client, err := NewClientV3(clus.Members[0])
 	if client != nil || err == nil {
 		t.Fatalf("expected no client")
@@ -1654,7 +1657,7 @@ func TestTLSReloadAtomicReplace(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	testTLSReload(t, cloneFunc, replaceFunc, revertFunc)
+	testTLSReload(t, cloneFunc, replaceFunc, revertFunc, false)
 }
 
 // TestTLSReloadCopy ensures server reloads expired/valid certs
@@ -1684,17 +1687,57 @@ func TestTLSReloadCopy(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	testTLSReload(t, cloneFunc, replaceFunc, revertFunc)
+	testTLSReload(t, cloneFunc, replaceFunc, revertFunc, false)
 }
 
-func testTLSReload(t *testing.T, cloneFunc func() transport.TLSInfo, replaceFunc func(), revertFunc func()) {
+// TestTLSReloadCopyIPOnly ensures server reloads expired/valid certs
+// when new certs are copied over, one by one. And expects server
+// to reject client requests, and vice versa.
+func TestTLSReloadCopyIPOnly(t *testing.T) {
+	certsDir, err := ioutil.TempDir(os.TempDir(), "fixtures-to-load")
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer os.RemoveAll(certsDir)
+
+	cloneFunc := func() transport.TLSInfo {
+		tlsInfo, terr := copyTLSFiles(testTLSInfoIP, certsDir)
+		if terr != nil {
+			t.Fatal(terr)
+		}
+		return tlsInfo
+	}
+	replaceFunc := func() {
+		if _, err = copyTLSFiles(testTLSInfoExpiredIP, certsDir); err != nil {
+			t.Fatal(err)
+		}
+	}
+	revertFunc := func() {
+		if _, err = copyTLSFiles(testTLSInfoIP, certsDir); err != nil {
+			t.Fatal(err)
+		}
+	}
+	testTLSReload(t, cloneFunc, replaceFunc, revertFunc, true)
+}
+
+func testTLSReload(
+	t *testing.T,
+	cloneFunc func() transport.TLSInfo,
+	replaceFunc func(),
+	revertFunc func(),
+	useIP bool) {
 	defer testutil.AfterTest(t)
 
 	// 1. separate copies for TLS assets modification
 	tlsInfo := cloneFunc()
 
 	// 2. start cluster with valid certs
-	clus := NewClusterV3(t, &ClusterConfig{Size: 1, PeerTLS: &tlsInfo, ClientTLS: &tlsInfo})
+	clus := NewClusterV3(t, &ClusterConfig{
+		Size:      1,
+		PeerTLS:   &tlsInfo,
+		ClientTLS: &tlsInfo,
+		UseIP:     useIP,
+	})
 	defer clus.Terminate(t)
 
 	// 3. concurrent client dialing while certs become expired
@@ -1712,6 +1755,7 @@ func testTLSReload(t *testing.T, cloneFunc func() transport.TLSInfo, replaceFunc
 				continue
 			}
 			cli, cerr := clientv3.New(clientv3.Config{
+				DialOptions: []grpc.DialOption{grpc.WithBlock()},
 				Endpoints:   []string{clus.Members[0].GRPCAddr()},
 				DialTimeout: time.Second,
 				TLS:         cc,
@@ -1892,7 +1936,18 @@ func eqErrGRPC(err1 error, err2 error) bool {
 // FailFast=false works with Put.
 func waitForRestart(t *testing.T, kvc pb.KVClient) {
 	req := &pb.RangeRequest{Key: []byte("_"), Serializable: true}
-	if _, err := kvc.Range(context.TODO(), req, grpc.FailFast(false)); err != nil {
-		t.Fatal(err)
+	// TODO: Remove retry loop once the new grpc load balancer provides retry.
+	var err error
+	for i := 0; i < 10; i++ {
+		if _, err = kvc.Range(context.TODO(), req, grpc.FailFast(false)); err != nil {
+			if status, ok := status.FromError(err); ok && status.Code() == codes.Unavailable {
+				time.Sleep(time.Millisecond * 250)
+			} else {
+				t.Fatal(err)
+			}
+		}
+	}
+	if err != nil {
+		t.Fatalf("timed out waiting for restart: %v", err)
 	}
 }

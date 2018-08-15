@@ -831,6 +831,36 @@ func TestSetUniqueTogether(t *testing.T) {
 	}
 }
 
+func TestSetUniqueTogetherIdempotent(t *testing.T) {
+	dbmap := newDbMap()
+	table := dbmap.AddTable(UniqueColumns{}).SetUniqueTogether("FirstName", "LastName")
+	table.SetUniqueTogether("FirstName", "LastName")
+	err := dbmap.CreateTablesIfNotExists()
+	if err != nil {
+		panic(err)
+	}
+	defer dropAndClose(dbmap)
+
+	n1 := &UniqueColumns{"Steve", "Jobs", "Cupertino", 95014}
+	err = dbmap.Insert(n1)
+	if err != nil {
+		t.Error(err)
+	}
+
+	// Should still fail because of the constraint
+	n2 := &UniqueColumns{"Steve", "Jobs", "Sunnyvale", 94085}
+	err = dbmap.Insert(n2)
+	if err == nil {
+		t.Error(err)
+	}
+
+	// Should have only created one unique constraint
+	actualCount := strings.Count(table.SqlForCreate(false), "unique")
+	if actualCount != 1 {
+		t.Errorf("expected one unique index, found %d: %s", actualCount, table.SqlForCreate(false))
+	}
+}
+
 func TestPersistentUser(t *testing.T) {
 	dbmap := newDbMap()
 	dbmap.Exec("drop table if exists PersistentUser")
@@ -1400,6 +1430,113 @@ func TestTransaction(t *testing.T) {
 	}
 	if !reflect.DeepEqual(inv2, obj) {
 		t.Errorf("%v != %v", inv2, obj)
+	}
+}
+
+func TestTransactionExecNamed(t *testing.T) {
+	if os.Getenv("GORP_TEST_DIALECT") == "postgres" {
+		return
+	}
+	dbmap := initDbMap()
+	defer dropAndClose(dbmap)
+	trans, err := dbmap.Begin()
+	if err != nil {
+		panic(err)
+	}
+	defer trans.Rollback()
+	// exec should support named params
+	args := map[string]interface{}{
+		"created":100,
+		"updated":200,
+		"memo":"unpaid",
+		"personID":0,
+		"isPaid": false,
+	}
+
+	result, err := trans.Exec(`INSERT INTO invoice_test (Created, Updated, Memo, PersonId, IsPaid) Values(:created, :updated, :memo, :personID, :isPaid)`, args)
+	if err != nil {
+		panic(err)
+	}
+	id, err := result.LastInsertId()
+	if err != nil {
+		panic(err)
+	}
+	var checkMemo = func(want string) {
+		args := map[string]interface{}{
+			"id":id,
+		}
+		memo, err := trans.SelectStr("select memo from invoice_test where id = :id", args)
+		if err != nil {
+			panic(err)
+		}
+		if memo != want {
+			t.Errorf("%q != %q", want, memo)
+		}
+	}
+	checkMemo("unpaid")
+
+	// exec should still work with ? params
+	result, err = trans.Exec(`INSERT INTO invoice_test (Created, Updated, Memo, PersonId, IsPaid) Values(?, ?, ?, ?, ?)`, 10,15,"paid",0,true)
+	if err != nil {
+		panic(err)
+	}
+	id, err = result.LastInsertId()
+	if err != nil {
+		panic(err)
+	}
+	checkMemo("paid")
+	err = trans.Commit()
+	if err != nil {
+		panic(err)
+	}
+}
+
+func TestTransactionExecNamedPostgres(t *testing.T) {
+	if os.Getenv("GORP_TEST_DIALECT") != "postgres" {
+		return
+	}
+	dbmap := initDbMap()
+	defer dropAndClose(dbmap)
+	trans, err := dbmap.Begin()
+	if err != nil {
+		panic(err)
+	}
+	// exec should support named params
+	args := map[string]interface{}{
+		"created":100,
+		"updated":200,
+		"memo":"zzTest",
+		"personID":0,
+		"isPaid": false,
+	}
+	_, err = trans.Exec(`INSERT INTO invoice_test ("Created", "Updated", "Memo", "PersonId", "IsPaid") Values(:created, :updated, :memo, :personID, :isPaid)`, args)
+	if err != nil {
+		panic(err)
+	}
+	var checkMemo = func(want string) {
+		args := map[string]interface{}{
+			"memo":want,
+		}
+		memo, err := trans.SelectStr(`select "Memo" from invoice_test where "Memo" = :memo`, args)
+		if err != nil {
+			panic(err)
+		}
+		if memo != want {
+			t.Errorf("%q != %q", want, memo)
+		}
+	}
+	checkMemo("zzTest")
+
+	// exec should still work with ? params
+	_, err = trans.Exec(`INSERT INTO invoice_test ("Created", "Updated", "Memo", "PersonId", "IsPaid") Values($1, $2, $3, $4, $5)`, 10,15,"yyTest",0,true)
+
+	if err != nil {
+		panic(err)
+	}
+	checkMemo("yyTest")
+	err = trans.Commit()
+	if err != nil {
+		panic(err)
 	}
 }
 
@@ -2358,6 +2495,34 @@ func TestPrepare(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
+}
+
+type UUID4 string
+
+func (u UUID4) Value() (driver.Value, error) {
+	if u == "" {
+		return nil, nil
+	}
+
+	return string(u), nil
+}
+
+type NilPointer struct {
+	ID     string
+	UserID *UUID4
+}
+
+func TestCallOfValueMethodOnNilPointer(t *testing.T) {
+	dbmap := newDbMap()
+	dbmap.AddTable(NilPointer{}).SetKeys(false, "ID")
+	defer dropAndClose(dbmap)
+	err := dbmap.CreateTables()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	nilPointer := &NilPointer{ID: "abc", UserID: nil}
+	_insert(dbmap, nilPointer)
 }
 
 func BenchmarkNativeCrud(b *testing.B) {

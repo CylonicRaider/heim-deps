@@ -29,11 +29,10 @@ import (
 	pb "github.com/coreos/etcd/etcdserver/etcdserverpb"
 	"github.com/coreos/etcd/mvcc/backend"
 
+	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/metadata"
 )
-
-func init() { BcryptCost = bcrypt.MinCost }
 
 func dummyIndexWaiter(index uint64) <-chan struct{} {
 	ch := make(chan struct{})
@@ -49,39 +48,61 @@ func TestNewAuthStoreRevision(t *testing.T) {
 	b, tPath := backend.NewDefaultTmpBackend()
 	defer os.Remove(tPath)
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as := NewAuthStore(b, tp)
+	as := NewAuthStore(zap.NewExample(), b, tp, bcrypt.MinCost)
 	err = enableAuthAndCreateRoot(as)
 	if err != nil {
 		t.Fatal(err)
 	}
 	old := as.Revision()
-	b.Close()
 	as.Close()
+	b.Close()
 
 	// no changes to commit
 	b2 := backend.NewDefaultBackend(tPath)
-	as = NewAuthStore(b2, tp)
+	as = NewAuthStore(zap.NewExample(), b2, tp, bcrypt.MinCost)
 	new := as.Revision()
-	b2.Close()
 	as.Close()
+	b2.Close()
 
 	if old != new {
 		t.Fatalf("expected revision %d, got %d", old, new)
 	}
 }
 
-func setupAuthStore(t *testing.T) (store *authStore, teardownfunc func(t *testing.T)) {
+// TestNewAuthStoreBryptCost ensures that NewAuthStore uses default when given bcrypt-cost is invalid
+func TestNewAuthStoreBcryptCost(t *testing.T) {
 	b, tPath := backend.NewDefaultTmpBackend()
+	defer os.Remove(tPath)
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as := NewAuthStore(b, tp)
+
+	invalidCosts := [2]int{bcrypt.MinCost - 1, bcrypt.MaxCost + 1}
+	for _, invalidCost := range invalidCosts {
+		as := NewAuthStore(zap.NewExample(), b, tp, invalidCost)
+		if as.BcryptCost() != bcrypt.DefaultCost {
+			t.Fatalf("expected DefaultCost when bcryptcost is invalid")
+		}
+		as.Close()
+	}
+
+	b.Close()
+}
+
+func setupAuthStore(t *testing.T) (store *authStore, teardownfunc func(t *testing.T)) {
+	b, tPath := backend.NewDefaultTmpBackend()
+
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
+	if err != nil {
+		t.Fatal(err)
+	}
+	as := NewAuthStore(zap.NewExample(), b, tp, bcrypt.MinCost)
 	err = enableAuthAndCreateRoot(as)
 	if err != nil {
 		t.Fatal(err)
@@ -514,11 +535,11 @@ func TestAuthInfoFromCtxRace(t *testing.T) {
 	b, tPath := backend.NewDefaultTmpBackend()
 	defer os.Remove(tPath)
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as := NewAuthStore(b, tp)
+	as := NewAuthStore(zap.NewExample(), b, tp, bcrypt.MinCost)
 	defer as.Close()
 
 	donec := make(chan struct{})
@@ -580,11 +601,11 @@ func TestRecoverFromSnapshot(t *testing.T) {
 
 	as.Close()
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as2 := NewAuthStore(as.be, tp)
+	as2 := NewAuthStore(zap.NewExample(), as.be, tp, bcrypt.MinCost)
 	defer func(a *authStore) {
 		a.Close()
 	}(as2)
@@ -662,11 +683,11 @@ func TestRolesOrder(t *testing.T) {
 	b, tPath := backend.NewDefaultTmpBackend()
 	defer os.Remove(tPath)
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), tokenTypeSimple, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as := NewAuthStore(b, tp)
+	as := NewAuthStore(zap.NewExample(), b, tp, bcrypt.MinCost)
 	err = enableAuthAndCreateRoot(as)
 	if err != nil {
 		t.Fatal(err)
@@ -703,16 +724,25 @@ func TestRolesOrder(t *testing.T) {
 	}
 }
 
-// TestAuthInfoFromCtxWithRoot ensures "WithRoot" properly embeds token in the context.
-func TestAuthInfoFromCtxWithRoot(t *testing.T) {
+func TestAuthInfoFromCtxWithRootSimple(t *testing.T) {
+	testAuthInfoFromCtxWithRoot(t, tokenTypeSimple)
+}
+
+func TestAuthInfoFromCtxWithRootJWT(t *testing.T) {
+	opts := testJWTOpts()
+	testAuthInfoFromCtxWithRoot(t, opts)
+}
+
+// testAuthInfoFromCtxWithRoot ensures "WithRoot" properly embeds token in the context.
+func testAuthInfoFromCtxWithRoot(t *testing.T, opts string) {
 	b, tPath := backend.NewDefaultTmpBackend()
 	defer os.Remove(tPath)
 
-	tp, err := NewTokenProvider("simple", dummyIndexWaiter)
+	tp, err := NewTokenProvider(zap.NewExample(), opts, dummyIndexWaiter)
 	if err != nil {
 		t.Fatal(err)
 	}
-	as := NewAuthStore(b, tp)
+	as := NewAuthStore(zap.NewExample(), b, tp, bcrypt.MinCost)
 	defer as.Close()
 
 	if err = enableAuthAndCreateRoot(as); err != nil {

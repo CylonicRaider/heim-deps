@@ -38,6 +38,8 @@ The peer options work the same way as the client-to-server options:
 
 If either a client-to-server or peer certificate is supplied the key must also be set. All of these configuration options are also available through the environment variables, `ETCD_CA_FILE`, `ETCD_PEER_CA_FILE` and so on.
 
+`--cipher-suites`: Comma-separated list of supported TLS cipher suites between server/client and peers (empty will be auto-populated by Go). Available from v3.2.22+, v3.3.7+, and v3.4+.
+
 ## Example 1: Client-to-server transport security with HTTPS
 
 For this, have a CA certificate (`ca.crt`) and signed key pair (`server.crt`, `server.key`) ready.
@@ -120,6 +122,49 @@ And also the response from the server:
         "value": "bar"
     }
 }
+```
+
+Specify cipher suites to block [weak TLS cipher suites](https://github.com/coreos/etcd/issues/8320).
+
+TLS handshake would fail when client hello is requested with invalid cipher suites.
+
+For instance:
+
+```bash
+$ etcd \
+  --cert-file ./server.crt \
+  --key-file ./server.key \
+  --trusted-ca-file ./ca.crt \
+  --cipher-suites TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+```
+
+Then, client requests must specify one of the cipher suites specified in the server:
+
+```bash
+# valid cipher suite
+$ curl \
+  --cacert ./ca.crt \
+  --cert ./server.crt \
+  --key ./server.key \
+  -L [CLIENT-URL]/metrics \
+  --ciphers ECDHE-RSA-AES128-GCM-SHA256
+
+# request succeeds
+etcd_server_version{server_version="3.2.22"} 1
+...
+```
+
+```bash
+# invalid cipher suite
+$ curl \
+  --cacert ./ca.crt \
+  --cert ./server.crt \
+  --key ./server.key \
+  -L [CLIENT-URL]/metrics \
+  --ciphers ECDHE-RSA-DES-CBC3-SHA
+
+# request fails with
+(35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure
 ```
 
 ## Example 3: Transport security & client certificates in a cluster
@@ -320,6 +365,22 @@ I | embed: serving client requests on 127.0.0.1:32379
 I | embed: serving client requests on 127.0.0.1:22379
 I | embed: serving client requests on 127.0.0.1:2379
 ```
+
+[v3.2.19](https://github.com/coreos/etcd/blob/master/CHANGELOG-3.2.md) and [v3.3.4](https://github.com/coreos/etcd/blob/master/CHANGELOG-3.3.md) fixes TLS reload when [certificate SAN field only includes IP addresses but no domain names](https://github.com/coreos/etcd/issues/9541). For example, a member is set up with CSRs (with `cfssl`) as below:
+
+```json
+{
+  "CN": "etcd.local",
+  "hosts": [
+    "127.0.0.1"
+  ],
+```
+
+In Go, server calls `(*tls.Config).GetCertificate` for TLS reload if and only if server's `(*tls.Config).Certificates` field is not empty, or `(*tls.ClientHelloInfo).ServerName` is not empty with a valid SNI from the client. Previously, etcd always populates `(*tls.Config).Certificates` on the initial client TLS handshake, as non-empty. Thus, client was always expected to supply a matching SNI in order to pass the TLS verification and to trigger `(*tls.Config).GetCertificate` to reload TLS assets.
+
+However, a certificate whose SAN field does [not include any domain names but only IP addresses](https://github.com/coreos/etcd/issues/9541) would request `*tls.ClientHelloInfo` with an empty `ServerName` field, thus failing to trigger the TLS reload on initial TLS handshake; this becomes a problem when expired certificates need to be replaced online.
+
+Now, `(*tls.Config).Certificates` is created empty on initial TLS client handshake, first to trigger `(*tls.Config).GetCertificate`, and then to populate rest of the certificates on every new TLS connection, even when client SNI is empty (e.g. cert only includes IPs).
 
 ## Notes for Host Whitelist
 
