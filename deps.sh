@@ -3,10 +3,28 @@ abspath() { cd $(dirname $1); echo $(pwd)/$(basename $1); }
 
 usage="USAGE: $0 (update|update-go|update-js|compact-js) <heim-dir>"
 
+get_emoji() {
+  # Newer versions of twemoji no longer ship the images themselves on npm, and
+  # recommend hunting for them in the GitHub repository instead.
+  local version="$(egrep '^ *"version":' node_modules/twemoji/package.json | sed -r 's/.*"([^"]+)",?$/\1/')"
+
+  rm -rf emoji-svg
+
+  mkdir -p tmp
+
+  git -C tmp clone --depth 1 -b gh-pages https://github.com/twitter/twemoji
+
+  mv "tmp/twemoji/v/$version/svg" emoji-svg
+
+  rm -rf tmp
+}
+
 update_js_deps() {
   cp $HEIMDIR/client/package.json ./
 
   npm install
+
+  get_emoji
 
   rm package.json
 }
