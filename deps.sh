@@ -8,13 +8,12 @@ get_emoji() {
   # recommend hunting for them in the GitHub repository instead.
   local version="$(egrep '^ *"version":' node_modules/twemoji/package.json | sed -r 's/.*"([^"]+)",?$/\1/')"
 
-  rm -rf emoji-svg
-
-  mkdir -p tmp
+  rm -rf node_modules/.resources/emoji-svg tmp
+  mkdir -p node_modules/.resources tmp
 
   git -C tmp clone --depth 1 -b gh-pages https://github.com/twitter/twemoji
 
-  mv "tmp/twemoji/v/$version/svg" emoji-svg
+  mv "tmp/twemoji/v/$version/svg" node_modules/.resources/emoji-svg
 
   rm -rf tmp
 }
@@ -36,9 +35,6 @@ compact_js_deps() {
 
   # remove tests
   find -name test -type d -print0 | xargs -0 rm -r
-
-  # merge devDependencies into dependencies so `npm dedupe` considers them.
-  perl -0777 -i.original -pe 's/\n  },\n  "devDependencies": \{\n/,\n/igs' package.json
 
   # A single global dedupe should suffice.
   #for d in node_modules/*; do pushd $d; npm dedupe; popd; done
