@@ -20,12 +20,11 @@ get_emoji() {
 
 update_js_deps() {
   cp $HEIMDIR/client/package.json ./
+  rm -rf package-lock.json
 
   npm install
 
   get_emoji
-
-  rm package.json
 }
 
 compact_js_deps() {
@@ -40,7 +39,7 @@ compact_js_deps() {
   #for d in node_modules/*; do pushd $d; npm dedupe; popd; done
   npm dedupe
 
-  rm package.json package.json.original
+  rm package.json
 }
 
 print_js_versions() {
