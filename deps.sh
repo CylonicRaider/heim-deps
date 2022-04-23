@@ -20,26 +20,20 @@ get_emoji() {
 
 update_js_deps() {
   cp $HEIMDIR/client/package.json ./
-  rm -rf package-lock.json
+  rm -rf node_modules package-lock.json
 
   npm install
 
   get_emoji
+
+  rm package.json
 }
 
 compact_js_deps() {
-  cp $HEIMDIR/client/package.json ./
-
   # a few hacks to reduce footprint...
 
   # remove tests
   find -name test -type d -print0 | xargs -0 rm -r
-
-  # A single global dedupe should suffice.
-  #for d in node_modules/*; do pushd $d; npm dedupe; popd; done
-  npm dedupe
-
-  rm package.json
 }
 
 print_js_versions() {
